@@ -149,8 +149,17 @@ Feature: Credit limit for customer
   Scenario: Cancel the request
     Given I click on element having xpath "//div[@class='pending-request-info']//section[@class='mrc-info-row']"
     Then I wait for page loading but no more than 20 seconds
-    Then I click on element having id "mrc-cancel-button"
-    Then I wait for page loading but no more than 20 seconds
+    And element having xpath "//div[@class='mrc-progress-bar']/section[@class='details']/span" should have text as "INITIALIZATION"
+    And element having class "react-tabs__tab--selected" should have text as "CUSTOMER DETAILS"
+    And element having id "react-tabs-0" should have text as "CUSTOMER DETAILS"
+    And element having id "react-tabs-2" should have text as "CREDIT DETAILS"
+    And element having id "react-tabs-4" should have text as "SALES"
+    And element having id "react-tabs-6" should have text as "COMMENTS"
+    And element having id "react-tabs-8" should have text as "ATTACHMENTS"
+    And element having id "mrc-cancel-button" should have text as "CANCEL"
+    And element having class "mrc-primary-button" should have text as "SUBMIT REQUEST"
+    And I click on element having id "mrc-cancel-button"
+    And I wait for page loading but no more than 20 seconds
 
 
    # Then I wait for page loading but no more than 20 seconds
