@@ -78,7 +78,7 @@ public final class DriverUtil {
                 return new PhantomJSDriver(capabilities);*/
         }
         FirefoxOptions options = new FirefoxOptions();
-        //capabilities.s
+        capabilities.setCapability(preferredDriver, headless);
         if (headless) {
             options.addArguments("-headless", "-safe-mode");
         }
