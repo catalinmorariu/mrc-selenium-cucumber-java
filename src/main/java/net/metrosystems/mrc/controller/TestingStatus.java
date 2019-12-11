@@ -23,7 +23,7 @@ public class TestingStatus {
         DONE;
     }
 
-    public State getStatus() {
+    public State getState() {
         return state;
     }
 

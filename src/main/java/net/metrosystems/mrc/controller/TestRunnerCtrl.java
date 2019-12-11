@@ -25,7 +25,7 @@ public class TestRunnerCtrl {
         @RequestParam(value = "stop", required = false, defaultValue = "false") boolean stopMigration) {
         if (stopMigration) {
             synchronized (TESTING_STATUS) {
-                if (TESTING_STATUS.getStatus() == TestingStatus.State.IN_PROGRESS) {
+                if (TESTING_STATUS.getState() == TestingStatus.State.IN_PROGRESS) {
                     TESTING_STATUS.setState(TestingStatus.State.INTERRUPTED);
                     return ResponseEntity.ok("Testing marked as to be interrupted");
                 } else {
@@ -51,12 +51,19 @@ public class TestRunnerCtrl {
 
     private boolean runTests() {
         try {
-            TESTING_STATUS.setState(TestingStatus.State.IN_PROGRESS);
-            Main.main(new String[] {
-                "--glue",
-                "net.metrosystems.mrc.seleniumcucumber.stepdefinitions",
-                "features/"}
-            );
+            synchronized (TESTING_STATUS) {
+                if (TESTING_STATUS.getState() != TestingStatus.State.IN_PROGRESS) {
+                    TESTING_STATUS.setState(TestingStatus.State.IN_PROGRESS);
+                    Main.main(new String[] {
+                        "--glue",
+                        "net.metrosystems.mrc.seleniumcucumber.stepdefinitions",
+                        "features/"}
+                    );
+                } else {
+                    LOG.error("Another test is in progress");
+                    return false;
+                }
+            }
             TESTING_STATUS.setState(TestingStatus.State.DONE);
         } catch (Exception e) {
             TESTING_STATUS.addException(e);

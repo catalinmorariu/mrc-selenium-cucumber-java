@@ -20,5 +20,5 @@ java \
 -Djava.security.egd=file:/dev/./urandom \
 -noverify \
 -XX:+UseContainerSupport \
--cp BOOT-INF/classes:BOOT-INF/lib/* net.metrosystems.migration.MigrationApplication \
+-cp BOOT-INF/classes:BOOT-INF/lib/* net.metrosystems.mrc.SeleniumCucumberMain \
 --spring.profiles.active=peng 2>&1
