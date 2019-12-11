@@ -20,4 +20,4 @@ java \
 -noverify \
 -Djava.security.egd=file:/dev/./urandom \
 -XX:+UseContainerSupport \
--jar selenium-cucumber-java.jar
+-jar mrc-selenium-cucumber-java-0.0.1.jar

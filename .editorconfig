@@ -25,6 +25,10 @@ indent_size = 4
 [*.xml]
 indent_size = 4
 
+# Indentation override for all xml
+[*.feature]
+indent_size = 2
+
 # Matches the exact files either package.json or .travis.yml
 [*.{yml, yaml}]
 indent_size = 2

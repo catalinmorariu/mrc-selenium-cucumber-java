@@ -1,5 +1,6 @@
 Feature: MRC Login
   As a user I should able to login into MRC.
+
   Scenario: Prerequisites
     Given I want to test against "https://mrc-pp.metrosystems.net"
     And I want to use user "catalin.morariu@metrosystems.net" with password "Rock.074438!"
@@ -8,12 +9,12 @@ Feature: MRC Login
   Scenario: I login with valid credential
     Given I go to the host
     When I enter user into input field having id "user_id"
-    
+
     And I enter password into input field having id "password"
     When I click on element having id "submit"
     Then I wait for page loading but no more than 20 seconds
-    
-      Scenario: Credit correction
+
+  Scenario: Credit correction
     Given I click on element having xpath "//*[@id="react"]/div/main/div/div/a[3]/label/h2"
     Then I enter "39/22044" into input field having id "search-input"
     And element having xpath "//section[@class='mrc-search-result']//a[@class='no-underline']/div/h2" should have text as "39/22044"
