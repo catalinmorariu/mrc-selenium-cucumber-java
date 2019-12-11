@@ -39,7 +39,7 @@ services:
     initialdelay: 10
 tests:
 - stage: dev
-  test: ./scripts/test-dev.sh
+#  test: ./scripts/test-dev.sh
 #  test: chmod +x tests/stop_deployment.sh && timeout 1h tests/stop_deployment.sh
 
   type: dockerfile
