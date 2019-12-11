@@ -37,6 +37,8 @@ ENV DRP_CF_VERSION caaeb91
 COPY scripts/run.sh /run.sh
 COPY features features
 COPY --from=builder /mnt/workspace/target/mrc-selenium-cucumber-java-0.0.1.jar /
+RUN bash -c 'unzip -q "mrc-selenium-cucumber-java-0.0.1.jar"'
+RUN rm /mrc-selenium-cucumber-java-0.0.1.jar
 
 #CMD ["/run.sh"]
 CMD /run.sh

@@ -17,7 +17,8 @@ log "ls: `ls|tr '\n' ' '`"
 
 
 java \
--noverify \
 -Djava.security.egd=file:/dev/./urandom \
+-noverify \
 -XX:+UseContainerSupport \
--jar mrc-selenium-cucumber-java-0.0.1.jar
+-cp BOOT-INF/classes:BOOT-INF/lib/* net.metrosystems.migration.MigrationApplication \
+--spring.profiles.active=peng 2>&1
