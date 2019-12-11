@@ -1,17 +1,28 @@
-*~
-target
-.idea
-*.iml
-settings.xml
-.classpath.txt
-.fullclasspath.txt
+target/
+!.mvn/wrapper/maven-wrapper.jar
 
-# eclipse
-.project
-.buildpath
+### STS ###
+.apt_generated
 .classpath
+.factorypath
+.project
 .settings
-.checkstyle
+.springBeans
 
-.mvn/wrapper/maven-wrapper.jar
-dependency-reduced-pom.xml
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+
+### NetBeans ###
+nbproject/private/
+build/
+nbbuild/
+dist/
+nbdist/
+.nb-gradle/
+
+# Folder view configuration files
+.DS_Store
+Desktop.ini
