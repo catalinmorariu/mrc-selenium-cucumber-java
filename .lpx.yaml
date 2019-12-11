@@ -36,13 +36,7 @@ services:
           cpu: "1.5"
   check: true
   probe:
-    initialdelay: 10
-tests:
-- stage: dev
-#  test: ./scripts/test-dev.sh
-#  test: chmod +x tests/stop_deployment.sh && timeout 1h tests/stop_deployment.sh
-
-  type: dockerfile
+    initialdelay: 5
 watchers:
 - catalin.morariu@metrosystems.net
 
