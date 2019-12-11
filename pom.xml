@@ -7,6 +7,14 @@
     <version>0.0.1</version>
     <packaging>jar</packaging>
     <name>selenium-cucumber-java</name>
+
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.2.2.RELEASE</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
+
     <properties>
         <top.dir>${project.basedir}</top.dir>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -16,8 +24,11 @@
         <cucumber.version>4.8.0</cucumber.version>
         <geckodriver.version>0.25.0</geckodriver.version>
         <guava.version>25.0-jre</guava.version>
+        <jackson.version>2.10.1</jackson.version>
+        <jackson-databind.version>2.10.1</jackson-databind.version>
         <java.version>11</java.version>
         <junit-jupiter.version>5.5.2</junit-jupiter.version>
+        <logstash-logback-encoder.version>6.2</logstash-logback-encoder.version>
         <maven-checkstyle-plugin.version>3.1.0</maven-checkstyle-plugin.version>
         <maven.compiler.release>${java.version}</maven.compiler.release>
         <maven-enforcer-plugin.version>3.0.0-M2</maven-enforcer-plugin.version>
@@ -32,6 +43,55 @@
     </properties>
 
     <dependencies>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context-indexer</artifactId>
+            <version>${spring-framework.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+            <scope>runtime</scope>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>net.logstash.logback</groupId>
+            <artifactId>logstash-logback-encoder</artifactId>
+            <version>${logstash-logback-encoder.version}</version>
+            <scope>runtime</scope>
+        </dependency>
+        <!-- START Dependencies for logstash-logback-encoder -->
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-access</artifactId>
+        </dependency>
+        <dependency>
+            <!-- JSR310: Java 8 Time APIs for Jackson -->
+            <groupId>com.fasterxml.jackson.datatype</groupId>
+            <artifactId>jackson-datatype-jsr310</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>
+        <dependency>
+            <!-- Jackson support for Optional et al-->
+            <groupId>com.fasterxml.jackson.datatype</groupId>
+            <artifactId>jackson-datatype-jdk8</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.datatype</groupId>
+            <artifactId>jackson-datatype-guava</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>
+        <!-- END Dependencies for logstash-logback-encoder -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
         <!-- These are the cucumber dependencies -->
         <dependency>
             <groupId>io.cucumber</groupId>

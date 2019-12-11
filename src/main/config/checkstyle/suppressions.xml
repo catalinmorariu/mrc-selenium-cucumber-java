@@ -5,5 +5,5 @@
 <suppressions>
     <suppress checks="Header"
               files=".properties"/>
-    <suppress checks="HideUtilityClassConstructor" files="MrcApprovalServiceApplication.java"/>
+    <suppress checks="HideUtilityClassConstructor" files="SeleniumCucumberMain.java"/>
 </suppressions>
