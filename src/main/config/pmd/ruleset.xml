@@ -104,8 +104,6 @@
         <exclude name="MissingBreakInSwitch"/>
         <!-- TODO: Under the question, e.g CreditData -->
         <exclude name="MissingSerialVersionUID"/>
-        <!-- TODO: Refactor ApprovalReleased -->
-        <exclude name="MissingStaticMethodInNonInstantiatableClass"/>
         <!-- TODO: A number of classes does useless null assignment -->
         <exclude name="NullAssignment"/>
         <!-- TODO: several classes with fields in db -->
@@ -145,14 +143,10 @@
         <exclude name="BooleanGetMethodName"/>
         <!-- TODO: Auth -->
         <exclude name="ClassNamingConventions"/>
-        <!-- TODO: Lots of classes with default access to fields/methods-->
-        <exclude name="CommentDefaultAccessModifier"/>
         <!-- TODO: More than 80 violations -->
         <exclude name="ConfusingTernary"/>
         <!-- Contradictory rule -->
         <exclude name="ControlStatementBraces"/>
-        <!-- TODO: Lots of violations -->
-        <exclude name="DefaultPackage"/>
         <!-- Contradictory rule -->
         <exclude name="FieldNamingConventions"/>
         <!-- false positive for predicates -->
