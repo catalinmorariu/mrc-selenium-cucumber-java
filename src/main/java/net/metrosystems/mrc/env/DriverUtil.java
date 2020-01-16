@@ -9,7 +9,6 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
-import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.ErrorHandler;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -32,17 +31,16 @@ public final class DriverUtil {
         if (driver == null) {
             synchronized (DriverUtil.class) {
                 if (driver == null) {
-                    //System.setProperty("webdriver.chrome.driver", "webdrivers/chromedriver.exe");
-                    System.setProperty("webdriver.gecko.driver", Paths.get("drivers", "geckodriver-custom").toString());
-                    DesiredCapabilities capabilities = null;
-                    capabilities = DesiredCapabilities.firefox();
-                    capabilities.setJavascriptEnabled(true);
-                    capabilities.setCapability("takesScreenshot", true);
-                    final WebDriver chosenDriver = chooseDriver(capabilities);
+                    //System.setProperty("webdriver.chrome.driver", "drivers/chromedriver");
+                    //System.setProperty("webdriver.gecko.driver", Paths.get("drivers", "geckodriver-custom").toString());
+                    System.setProperty("webdriver.chrome.driver", Paths.get("drivers", "chromedriver").toString());
+                    ChromeOptions chromeOptions = new ChromeOptions();
+                    chromeOptions.addArguments("--headless");
+                    chromeOptions.addArguments("--no-sandbox");
+                    final WebDriver chosenDriver = chooseDriver(chromeOptions);
                     chosenDriver.manage().timeouts().setScriptTimeout(DEFAULT_WAIT,
                         TimeUnit.SECONDS);
                     chosenDriver.manage().window().maximize();
-                    driver = chosenDriver;
                 }
             }
         }
@@ -54,11 +52,11 @@ public final class DriverUtil {
      * <p>
      * Override it by passing -DWebDriver=Chrome to the command line arguments
      *
-     * @param capabilities
+     * @param chromeOptions2
      * @return
      */
-    private static WebDriver chooseDriver(DesiredCapabilities capabilities) {
-        String preferredDriver = System.getProperty("browser", "Firefox");
+    private static WebDriver chooseDriver(ChromeOptions chromeOptions2) {
+        String preferredDriver = System.getProperty("browser", "chrome");
         boolean headless = System.getProperty("Headless", "true").equals("true");
 
         if ("chrome".equals(preferredDriver.toLowerCase(Locale.ROOT))) {
@@ -66,7 +64,7 @@ public final class DriverUtil {
             if (headless) {
                 chromeOptions.addArguments("--headless");
             }
-            capabilities.setCapability(ChromeOptions.CAPABILITY, chromeOptions);
+           // chromeOptions2.setCapability(ChromeOptions.CAPABILITY, chromeOptions);
             System.out.println("********************* before driver created");
             ChromeDriver driver = new ChromeDriver();
             System.out.println("********************* after driver created");
@@ -76,15 +74,17 @@ public final class DriverUtil {
             return driver;
             /*case "phantomjs":
                 return new PhantomJSDriver(capabilities);*/
-        }
+        } else {
         FirefoxOptions options = new FirefoxOptions();
-        capabilities.setCapability(preferredDriver, headless);
+     //   chromeOptions2.setCapability(preferredDriver, headless);
         if (headless) {
-            options.addArguments("-headless", "-safe-mode");
+            options.setHeadless(true);
         }
-        capabilities.setCapability(FirefoxOptions.FIREFOX_OPTIONS, options);
+     //   chromeOptions2.setCapability(FirefoxOptions.FIREFOX_OPTIONS, options);
         return new FirefoxDriver();
     }
+    }
+
 
     public static WebElement waitAndGetElementByCssSelector(WebDriver driver, String selector,
                                                             int seconds) {
@@ -100,7 +100,7 @@ public final class DriverUtil {
                 if (driver != null) {
                     try {
                         driver.close();
-                        driver.quit(); // fails in current geckodriver! TODO: Fixme
+                        driver.quit();
                     } catch (NoSuchMethodError | NoSuchSessionException | SessionNotCreatedException ignored) {
                     } // in case close fails
                     driver = null;
