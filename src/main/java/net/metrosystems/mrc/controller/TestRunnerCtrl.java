@@ -54,11 +54,13 @@ public class TestRunnerCtrl {
             synchronized (TESTING_STATUS) {
                 if (TESTING_STATUS.getState() != TestingStatus.State.IN_PROGRESS) {
                     TESTING_STATUS.setState(TestingStatus.State.IN_PROGRESS);
+                    System.setProperty("Headless", "true");
                     Main.main(new String[] {
                         "--glue",
                         "net.metrosystems.mrc.seleniumcucumber.stepdefinitions",
                         "features/"}
                     );
+                    System.setProperty("Headless", "false");
                 } else {
                     LOG.error("Another test is in progress");
                     return false;
