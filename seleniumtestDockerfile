@@ -1,4 +1,4 @@
-FROM openjdk:11.0.5-jdk-slim as builder
+FROM openjdk:11.0.6-jdk-slim as builder
 
 WORKDIR /mnt/workspace
 # create user (not root user is required to start elastic)
