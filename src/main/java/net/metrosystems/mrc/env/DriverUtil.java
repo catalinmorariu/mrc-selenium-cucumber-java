@@ -1,5 +1,9 @@
 package net.metrosystems.mrc.env;
 
+import java.nio.file.Paths;
+import java.util.Locale;
+import java.util.concurrent.TimeUnit;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchSessionException;
 import org.openqa.selenium.SessionNotCreatedException;
@@ -13,10 +17,6 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.ErrorHandler;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
-import java.nio.file.Paths;
-import java.util.Locale;
-import java.util.concurrent.TimeUnit;
 
 /**
  * Created by tom on 24/02/17.
@@ -58,7 +58,7 @@ public final class DriverUtil {
      * @return
      */
     private static WebDriver chooseDriver(DesiredCapabilities capabilities) {
-        String preferredDriver = System.getProperty("browser", "Firefox");
+        String preferredDriver = System.getProperty("browser", "chrome");
         boolean headless = System.getProperty("Headless", "true").equals("true");
 
         if ("chrome".equals(preferredDriver.toLowerCase(Locale.ROOT))) {
