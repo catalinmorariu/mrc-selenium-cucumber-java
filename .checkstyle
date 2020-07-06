@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <fileset-config file-format-version="1.2.0" simple-config="false" sync-formatter="false">
-  <local-check-config name="maven-checkstyle-plugin validate" location="file:/home/catalin/eclipse-workspace/SeleniumC/seleniumtests/src/main/config/checkstyle/checker.xml" type="remote" description="maven-checkstyle-plugin configuration validate">
-    <property name="checkstyle.header.file" value="/home/catalin/eclipse-workspace/.metadata/.plugins/org.eclipse.core.resources/.projects/mrc-selenium-cucumber-java/com.basistech.m2e.code.quality.checkstyleConfigurator/checkstyle-header-validate.txt"/>
+  <local-check-config name="maven-checkstyle-plugin validate" location="file:/home/catalin/workspace/Selenium/seleniumtest%20V3/src/main/config/checkstyle/checker.xml" type="remote" description="maven-checkstyle-plugin configuration validate">
+    <property name="checkstyle.header.file" value="/home/catalin/eclipse-workspace/.metadata/.plugins/org.eclipse.core.resources/.projects/V3/com.basistech.m2e.code.quality.checkstyleConfigurator/checkstyle-header-validate.txt"/>
     <property name="checkstyle.cache.file" value="${project_loc}/target/checkstyle-cachefile"/>
-    <property name="checkstyle.suppressions.file" value="/home/catalin/eclipse-workspace/.metadata/.plugins/org.eclipse.core.resources/.projects/mrc-selenium-cucumber-java/com.basistech.m2e.code.quality.checkstyleConfigurator/checkstyle-suppressions-validate.xml"/>
+    <property name="checkstyle.suppressions.file" value="/home/catalin/eclipse-workspace/.metadata/.plugins/org.eclipse.core.resources/.projects/V3/com.basistech.m2e.code.quality.checkstyleConfigurator/checkstyle-suppressions-validate.xml"/>
   </local-check-config>
   <fileset name="java-sources-validate" enabled="true" check-config-name="maven-checkstyle-plugin validate" local="true">
     <file-match-pattern match-pattern="^src/test/java.*\/.*\.java" include-pattern="true"/>
