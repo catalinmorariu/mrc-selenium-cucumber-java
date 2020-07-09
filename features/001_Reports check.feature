@@ -30,4 +30,5 @@ Feature: Reports check
   Then I navigate back
   Then I refresh page
   Then I navigate back
+  Then I refresh page
  
