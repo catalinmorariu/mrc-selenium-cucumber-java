@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
 import java.util.Date;
 import java.util.Map;
 import java.util.concurrent.CompletableFuture;
@@ -48,6 +47,22 @@ public class TestRunnerCtrl {
         CompletableFuture.runAsync(this::runTests);
         return new ResponseEntity<>("Started", HttpStatus.OK);
     }
+    @RequestMapping(method = RequestMethod.GET, path = "testing/reportsCheck", produces = MediaType.TEXT_PLAIN_VALUE)
+    public ResponseEntity<String> startSpecificTest() {
+        LOG.info("Testing started at {}", new Date());
+        this.runFirstTest();
+        return new ResponseEntity<>("Started", HttpStatus.OK);
+    }
+
+    private void runFirstTest() {
+        System.setProperty("Headless", "true");
+        Main.main(new String[] {
+            "--glue",
+            "net.metrosystems.mrc.seleniumcucumber.stepdefinitions",
+            "features/001_Reports check.feature"}
+        );
+        System.setProperty("Headless", "false");
+        }
 
     private boolean runTests() {
         try {
