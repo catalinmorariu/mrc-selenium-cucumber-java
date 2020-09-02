@@ -37,11 +37,7 @@ services:
   check: true
   probe:
     initialdelay: 5
-tests:
- - stage: dev
-   type: dockerfile
-   test: mvn verify -P integration-test
-    
+
 watchers:
 - catalin.morariu@metrosystems.net
 
