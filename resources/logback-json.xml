@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+
+		<!--
+		Documentation: https://github.com/logstash/logstash-logback-encoder
+		-->
+		<encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
+			<providers>
+				<timestamp/>
+				<stackTrace/>
+				<!-- Render Logstash Markers as json Field, used to add per Log statement fields -->
+				<logstashMarkers/>
+				<!--&lt;!&ndash; Set the retention field to business or technical based on the markers containe in the log event &ndash;&gt;-->
+				<!--<provider class="net.metrosystems.coni2.system.log.RetentionFieldProvider"/>-->
+				<mdc/>
+				<pattern>
+					<pattern>
+						{
+						"@hostname" : "${HOSTNAME}",
+						"@vertical" : "${DRP_CF_VERTICAL}",
+						"@type": "service",
+
+						"@service-name": "seleniumtest",
+						"@service-version": "${DRP_CF_VERSION}",
+
+						<!-- The Trace ID is written into the MDC by TraceIdService
+						-->
+						"@trace-id" : "%mdc{@trace-id}",
+						<!-- Custom Fields not defined by PENG -->
+						"stage": "${DRP_CF_STAGE}",
+						"thread": "%thread",
+						"logger": "%logger",
+						"levelText": "%level",
+						"message": "%.-8000message"
+						}
+					</pattern>
+				</pattern>
+			</providers>
+		</encoder>
+	</appender>
+
+	<logger name="net.metrosystems.mrc" level="DEBUG"/>
+	<logger name="net.metrosystems.mrc.PlatformChecks" level="INFO"/>
+	<logger name="org.springframework.web" level="INFO"/>
+
+	<springProfile name="dev">
+        <logger name="io.micrometer.datadog.DatadogMeterRegistry" level="WARN" />
+	</springProfile>
+
+    <springProfile name="pp">
+        <logger name="io.micrometer.datadog.DatadogMeterRegistry" level="WARN"/>
+        <logger name="org.apache.kafka" level="WARN"/>
+    </springProfile>
+
+	<springProfile name="prod">
+        <logger name="io.micrometer.datadog.DatadogMeterRegistry" level="WARN" />
+		<logger name="net.metrosystems.mrc" level="INFO"/>
+        <logger name="org.apache.kafka" level="WARN"/>
+	</springProfile>
+
+	<root level="INFO">
+		<appender-ref ref="STDOUT"/>
+	</root>
+
+</configuration>
