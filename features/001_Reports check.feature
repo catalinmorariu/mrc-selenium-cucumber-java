@@ -1,7 +1,7 @@
 Feature: Reports check
 
   Scenario: Prerequisites
-  Given I want to test against "https://mrc-dev.metrosystems.net/"
+  Given I want to test against "https://mrc-pp.metrosystems.net/"
   And I want to use user "catalin.morariu@metrosystems.net" with password "Sindo.074438!"
   And I want to use default timeout 20 seconds for each operation
 
@@ -12,7 +12,7 @@ Feature: Reports check
   When I click on element having id "submit"
   Then I wait for page loading but no more than 20 seconds
       
-  Scenario: Solvency MCC score
+  Scenario: Rep
   Then element having xpath "//*[@id="react"]/div/main/div/div[1]/a[7]/label/h2" should be present 
   When I click on element having xpath "//*[@id="react"]/div/main/div/div[1]/a[7]/label/h2"
   Then element having xpath "//*[@id="react"]/div/main/div/div/div/div/div[2]/div/div[1]/a/div/img" should be present
