@@ -37,7 +37,6 @@ services:
   check: true
   probe:
     initialdelay: 5
-    
  tests:
  -  stage: dev
     type: dockerfile
