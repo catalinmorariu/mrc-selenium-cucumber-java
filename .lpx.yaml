@@ -38,11 +38,6 @@ services:
   probe:
     initialdelay: 5
     
-tests:
-- stage: dev
-  test: mvn verify -P test
-#  test: chmod +x tests/stop_deployment.sh && timeout 1h tests/stop_deployment.sh
-  type: dockerfile
 watchers:
 - catalin.morariu@metrosystems.net
 
