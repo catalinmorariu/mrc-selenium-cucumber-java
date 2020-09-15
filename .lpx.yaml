@@ -38,7 +38,7 @@ services:
   probe:
     initialdelay: 5
     
-  tests:
+ tests:
  -  stage: dev
     type: dockerfile
     test: mvn verify -P test
