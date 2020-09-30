@@ -38,7 +38,7 @@ services:
   probe:
     initialdelay: 5
 tests: 
- stage: pp
+ -stage: pp
  test: mvn test
  type: dockerfile
 watchers:
