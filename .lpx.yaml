@@ -37,6 +37,12 @@ services:
   check: true
   probe:
     initialdelay: 5
+    
+tests:
+- stage: pp
+  test: ./scripts/test-pp.sh
+  type: dockerfile
+
 watchers:
 - catalin.morariu@metrosystems.net
 
