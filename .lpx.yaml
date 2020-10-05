@@ -40,7 +40,7 @@ services:
     
 tests:
 - stage: pp
-  test: ./scripts/test-pp.sh
+  test: mvn test
   type: dockerfile
 
 watchers:
