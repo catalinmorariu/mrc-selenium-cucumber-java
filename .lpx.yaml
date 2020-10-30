@@ -7,15 +7,7 @@ services:
 #  scale: single
   perStageConfiguration: true
   stageConfig:
-    dev:
-      replicas: 1
-      resources:
-        requests:
-          memory: 800Mi
-          cpu: "0.1"
-        limits:
-          memory: 1400Mi
-          cpu: "1.5"
+
     pp:
       replicas: 1
       resources:
@@ -25,23 +17,10 @@ services:
         limits:
           memory: 1400Mi
           cpu: "1.5"
-    prod:
-      replicas: 1
-      resources:
-        requests:
-          memory: 930Mi
-          cpu: "0.1"
-        limits:
-          memory: 1400Mi
-          cpu: "1.5"
+
   check: true
   probe:
     initialdelay: 5
-    
-tests:
-- stage: pp
-  test: mvn test
-  type: dockerfile
 
 watchers:
 - catalin.morariu@metrosystems.net

@@ -4,11 +4,13 @@ import io.cucumber.java.en.Then;
 import net.metrosystems.mrc.env.DriverUtil;
 
 import java.util.concurrent.TimeUnit;
+import org.springframework.boot.SpringBootConfiguration;
 
 import static net.metrosystems.mrc.seleniumcucumber.methods.BaseTest.INPUT_METHODS;
 import static net.metrosystems.mrc.seleniumcucumber.methods.BaseTest.MISC_METHODS;
 import static net.metrosystems.mrc.seleniumcucumber.methods.BaseTest.NAVIGATE_METHODS;
 
+@SpringBootConfiguration
 public class UserStepDefinitions {
     private static volatile String host;
     private static volatile String user;
