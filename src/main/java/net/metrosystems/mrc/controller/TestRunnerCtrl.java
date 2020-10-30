@@ -47,6 +47,14 @@ public class TestRunnerCtrl {
         CompletableFuture.runAsync(this::runTests);
         return new ResponseEntity<>("Started", HttpStatus.OK);
     }
+
+    @RequestMapping(method = RequestMethod.GET, path = "testing-vlad", produces = MediaType.TEXT_PLAIN_VALUE)
+    public ResponseEntity<String> startTestsVlad() {
+        LOG.info("Testing started at {}", new Date());
+        this.runTests();
+        return new ResponseEntity<>("Started", HttpStatus.OK);
+    }
+
     @RequestMapping(method = RequestMethod.GET, path = "testing/reportsCheck", produces = MediaType.TEXT_PLAIN_VALUE)
     public ResponseEntity<String> startSpecificTest() {
         LOG.info("Testing started at {}", new Date());
@@ -70,12 +78,14 @@ public class TestRunnerCtrl {
                 if (TESTING_STATUS.getState() != TestingStatus.State.IN_PROGRESS) {
                     TESTING_STATUS.setState(TestingStatus.State.IN_PROGRESS);
                     System.setProperty("Headless", "true");
-                    Main.main(new String[] {
+                    byte result = Main.run(new String[] {
                         "--glue",
                         "net.metrosystems.mrc.seleniumcucumber.stepdefinitions",
-                        "features/"}
-                    );
+                        "features/"}, Thread.currentThread().getContextClassLoader());
                     System.setProperty("Headless", "false");
+
+                    LOG.info("result byte: {}", result);
+
                 } else {
                     LOG.error("Another test is in progress");
                     return false;
