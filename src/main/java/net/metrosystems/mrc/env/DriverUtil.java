@@ -63,26 +63,16 @@ public final class DriverUtil {
 
         if ("chrome".equals(preferredDriver.toLowerCase(Locale.ROOT))) {
             final ChromeOptions chromeOptions = new ChromeOptions();
-
-            chromeOptions.addArguments("--headless");
-            chromeOptions.addArguments("--no-sandbox"); //needed to run as root on ubuntu server
-            chromeOptions.addArguments("--incognito");
-            chromeOptions.addArguments("--disable-popup-blocking");
-            chromeOptions.addArguments("--disable-default-apps");
-            chromeOptions.addArguments("--disable-infobars");
-            chromeOptions.addArguments("--disable-extensions");
-            chromeOptions.addArguments("--disable-dev-shm-usage");
-
+            if (headless) {
+                chromeOptions.addArguments("--headless");
+            }
             capabilities.setCapability(ChromeOptions.CAPABILITY, chromeOptions);
             System.out.println("********************* before driver created");
-            //System.setProperty("webdriver.chrome.driver", Paths.get("drivers", "chromedriver").toString());
-            System.out.println("PATH TO DRIVER" + Paths.get("drivers", "chromedriver"));
-            System.setProperty("webdriver.chrome.driver", Paths.get("drivers", "chromedriver").toString());
-            ChromeDriver driver = new ChromeDriver(chromeOptions);
+            ChromeDriver driver = new ChromeDriver();
             System.out.println("********************* after driver created");
-            //ErrorHandler handler = new ErrorHandler();
-            //handler.setIncludeServerErrors(false);
-            //driver.setErrorHandler(handler);
+            ErrorHandler handler = new ErrorHandler();
+            handler.setIncludeServerErrors(false);
+            driver.setErrorHandler(handler);
             return driver;
             /*case "phantomjs":
                 return new PhantomJSDriver(capabilities);*/

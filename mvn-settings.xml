@@ -30,7 +30,6 @@
                     <name>libs-snapshot</name>
                     <url>https://artifactory.metrosystems.net/artifactory/libs-snapshot</url>
                 </repository>
-                
             </repositories>
             <pluginRepositories>
                 <pluginRepository>

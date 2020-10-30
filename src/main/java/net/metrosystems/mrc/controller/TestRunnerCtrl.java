@@ -70,11 +70,10 @@ public class TestRunnerCtrl {
                 if (TESTING_STATUS.getState() != TestingStatus.State.IN_PROGRESS) {
                     TESTING_STATUS.setState(TestingStatus.State.IN_PROGRESS);
                     System.setProperty("Headless", "true");
-                    Main.main(new String[] {	
+                    Main.main(new String[] {
                         "--glue",
                         "net.metrosystems.mrc.seleniumcucumber.stepdefinitions",
-                        "features"
-                        }
+                        "features/"}
                     );
                     System.setProperty("Headless", "false");
                 } else {
