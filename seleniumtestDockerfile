@@ -17,4 +17,6 @@ ENV MAVEN_OPTS="-Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4j
     SPRING_PROFILES_ACTIVE=ci
 
 EXPOSE 8080
-CMD ["mvn", "spring-boot:run"]
+RUN mvn spring-boot:run
+
+
