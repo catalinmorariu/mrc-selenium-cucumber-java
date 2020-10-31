@@ -63,13 +63,13 @@ public class TestRunnerCtrl {
     }
 
     private void runFirstTest() {
-        System.setProperty("Headless", "true");
+        //System.setProperty("Headless", "true");
         Main.main(new String[] {
             "--glue",
             "net.metrosystems.mrc.seleniumcucumber.stepdefinitions",
             "features/001_Reports check.feature"}
         );
-        System.setProperty("Headless", "false");
+        //System.setProperty("Headless", "false");
         }
 
     private boolean runTests() {
