@@ -44,12 +44,4 @@ public class TestingStatus {
         e.printStackTrace(new PrintWriter(sw));
         setOfExceptionStackTraces.add(sw.toString());
     }
-
-    public Map<String, String> toMap() {
-        return Map.of("State", state.name(),
-            "Testing started at", state == State.NOT_STARTED ? "" : new Date(startedAt.get()).toString(),
-            "Testing finished at", state != State.DONE ? "" : new Date(finishedAt.get()).toString(),
-            "Exception stacktraces (limited by " + LIMIT_OF_EXCEPTIONS_TO_STORE + ")", setOfExceptionStackTraces.toString()
-        );
-    }
 }

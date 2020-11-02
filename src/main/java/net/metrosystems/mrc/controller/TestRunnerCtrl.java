@@ -36,11 +36,6 @@ public class TestRunnerCtrl {
         }
     }
 
-    @RequestMapping(method = RequestMethod.GET, path = "testingStatus", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Map<String, String>> getMigrationStatus() {
-        return new ResponseEntity<>(TESTING_STATUS.toMap(), HttpStatus.OK);
-    }
-
     @RequestMapping(method = RequestMethod.GET, path = "testing", produces = MediaType.TEXT_PLAIN_VALUE)
     public ResponseEntity<String> startTests() {
         LOG.info("Testing started at {}", new Date());
