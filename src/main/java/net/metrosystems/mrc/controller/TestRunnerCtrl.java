@@ -46,8 +46,8 @@ public class TestRunnerCtrl {
     @RequestMapping(method = RequestMethod.GET, path = "testing-vlad", produces = MediaType.TEXT_PLAIN_VALUE)
     public ResponseEntity<String> startTestsVlad() {
         LOG.info("Testing started at {}", new Date());
-        this.runTests();
-        return new ResponseEntity<>("Started", HttpStatus.OK);
+        boolean result = this.runTests();
+        return result ? new ResponseEntity<>("Passed", HttpStatus.NO_CONTENT) : new ResponseEntity<>("Failed", HttpStatus.FOUND);
     }
 
     @RequestMapping(method = RequestMethod.GET, path = "testing/reportsCheck", produces = MediaType.TEXT_PLAIN_VALUE)
@@ -68,19 +68,17 @@ public class TestRunnerCtrl {
         }
 
     private boolean runTests() {
+        byte result;
         try {
             synchronized (TESTING_STATUS) {
                 if (TESTING_STATUS.getState() != TestingStatus.State.IN_PROGRESS) {
                     TESTING_STATUS.setState(TestingStatus.State.IN_PROGRESS);
                     System.setProperty("Headless", "true");
-                    byte result = Main.run(new String[] {
+                    result = Main.run(new String[] {
                         "--glue",
                         "net.metrosystems.mrc.seleniumcucumber.stepdefinitions",
                         "features/"}, Thread.currentThread().getContextClassLoader());
                     System.setProperty("Headless", "false");
-
-                    LOG.info("result byte: {}", result);
-
                 } else {
                     LOG.error("Another test is in progress");
                     return false;
@@ -92,6 +90,6 @@ public class TestRunnerCtrl {
             LOG.error("Exception ", e);
             return false;
         }
-        return true;
+        return result == 0 ? true : false;
     }
 }
