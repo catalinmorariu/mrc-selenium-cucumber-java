@@ -8,9 +8,9 @@ RUN apt -y install wget
 RUN apt-get -y install -y unzip xvfb libxi6 libgconf-2-4
 
 # Install Firefox
-RUN apt-get upgrade -y 
-RUN apt-get dist-upgrade -y
-RUN apt-get -y install firefox
+RUN apt update
+RUN apt install snapd snapd-xdg-open -y
+RUN snap install firefox -y
 
 # Install Chrome
 RUN wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
