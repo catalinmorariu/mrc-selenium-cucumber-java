@@ -10,7 +10,7 @@ RUN apt-get -y install -y unzip xvfb libxi6 libgconf-2-4
 # Install Firefox
 RUN apt-get upgrade -y 
 RUN apt-get dist-upgrade -y
-RUN apt -y install firefox
+RUN apt-get -y install firefox
 
 # Install Chrome
 RUN wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
