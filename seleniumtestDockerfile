@@ -8,9 +8,10 @@ RUN apt -y install wget
 RUN apt-get -y install -y unzip xvfb libxi6 libgconf-2-4
 
 # Install Firefox
+RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys A6DCF7707EBC211F
+RUN apt-add-repository "deb http://ppa.launchpad.net/ubuntu-mozilla-security/ppa/ubuntu bionic main"
 RUN apt update
-RUN apt install snapd snapd-xdg-open -y
-RUN snap install firefox -y
+RUN apt install firefox
 
 # Install Chrome
 RUN wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
