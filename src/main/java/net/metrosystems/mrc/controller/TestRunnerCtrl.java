@@ -45,10 +45,11 @@ public class TestRunnerCtrl {
     }
 
     @RequestMapping(method = RequestMethod.GET, path = "testing-vlad", produces = MediaType.TEXT_PLAIN_VALUE)
-    public ResponseEntity<String> startTestsVlad() {
+    public synchronized ResponseEntity<String> startTestsVlad() {
         LOG.info("Testing started at {}", new Date());
         boolean result = this.runTests();
-        return result ? new ResponseEntity<>("Passed", HttpStatus.NO_CONTENT) : new ResponseEntity<>("Failed", HttpStatus.FOUND);
+        LOG.info("result: {}", result);
+        return result ? new ResponseEntity<>("Passed", HttpStatus.OK) : new ResponseEntity<>("Failed", HttpStatus.FOUND);
     }
 
     @RequestMapping(method = RequestMethod.GET, path = "testing/reportsCheck", produces = MediaType.TEXT_PLAIN_VALUE)
@@ -69,7 +70,7 @@ public class TestRunnerCtrl {
         }
 
     private boolean runTests() {
-        byte result;
+        byte result = 1;
         try {
             synchronized (TESTING_STATUS) {
                 if (TESTING_STATUS.getState() != TestingStatus.State.IN_PROGRESS) {
@@ -82,14 +83,14 @@ public class TestRunnerCtrl {
                     System.setProperty("Headless", "false");
                 } else {
                     LOG.error("Another test is in progress");
-                    return false;
+                    //return false;
                 }
             }
             TESTING_STATUS.setState(TestingStatus.State.DONE);
         } catch (Exception e) {
             TESTING_STATUS.addException(e);
             LOG.error("Exception ", e);
-            return false;
+            //return false;
         }
         return result == 0 ? true : false;
     }
