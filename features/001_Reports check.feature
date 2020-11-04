@@ -9,7 +9,7 @@ Feature: Reports check
   Given I go to the host
   When I enter user into input field having id "user_id"
   And I enter password into input field having id "password"
-  When I click on element having id "submitt"
+  When I click on element having id "submit"
   Then I wait for page loading but no more than 20 seconds
 
 
