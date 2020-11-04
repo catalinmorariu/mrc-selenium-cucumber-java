@@ -8,6 +8,7 @@ RUN apt -y install wget
 RUN apt-get -y install -y unzip xvfb libxi6 libgconf-2-4
 
 # Install Firefox
+RUN apt-get update && apt-get install -y gnupg2
 RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys A6DCF7707EBC211F
 RUN apt-add-repository "deb http://ppa.launchpad.net/ubuntu-mozilla-security/ppa/ubuntu bionic main"
 RUN apt update
