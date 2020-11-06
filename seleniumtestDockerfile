@@ -12,6 +12,16 @@ RUN apt update
 RUN apt-get -y --reinstall install lsb-release
 RUN apt-get -y install libatk-bridge2.0-0
 RUN apt -y install libcairo-gobject2
+RUN apt-get -y install libgdk-pixbuf2.0-0
+RUN apt-get -y install libgtk-3-0
+RUN apt-get -y install libpango-1.0-0
+RUN apt-get -y install libpangocairo-1.0-0
+RUN apt-get -y install libpangoft2-1.0-0
+RUN apt-get -y install libxcomposite1
+RUN apt-get -y install libxcursor1
+
+
+
 RUN wget http://archive.ubuntu.com/ubuntu/pool/main/f/firefox/firefox_82.0.2+build1-0ubuntu0.18.04.1_amd64.deb
 RUN dpkg -i firefox_82.0.2+build1-0ubuntu0.18.04.1_amd64.deb
 
