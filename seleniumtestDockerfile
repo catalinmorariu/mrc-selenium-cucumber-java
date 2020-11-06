@@ -2,6 +2,8 @@ FROM openjdk:11.0.6-jdk-slim as builder
 
 WORKDIR /mnt/workspace
 
+RUN uname -a
+
 # Prereq
 RUN apt-get update
 RUN apt -y install wget
