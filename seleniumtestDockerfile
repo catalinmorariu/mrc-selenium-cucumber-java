@@ -50,7 +50,7 @@ COPY --chown=bob:root *.xml *.yaml /mnt/workspace/
 RUN ./mvnw dependency:go-offline -B --settings /mnt/workspace/mvn-settings.xml
 
 COPY --chown=bob:root src/main/config /mnt/workspace/src/main/config
-RUN ./mvnw checkstyle:check pmd:pmd spotbugs:check -B --settings /mnt/workspace/mvn-settings.xml
+#RUN ./mvnw checkstyle:check pmd:pmd spotbugs:check -B --settings /mnt/workspace/mvn-settings.xml
 
 COPY --chown=bob:root scripts /mnt/workspace/scripts
 COPY --chown=bob:root drivers /mnt/workspace/drivers
