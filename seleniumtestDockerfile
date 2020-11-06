@@ -7,7 +7,7 @@ RUN apt-get update
 RUN apt -y install wget
 RUN apt-get -y install -y unzip xvfb libxi6 libgconf-2-4
 
-# Install/Update firefox
+# Install/ Update firefox
 RUN wget http://archive.ubuntu.com/ubuntu/pool/main/f/firefox/firefox_82.0.2+build1-0ubuntu0.18.04.1_amd64.deb
 RUN dpkg -i firefox_82.0.2+build1-0ubuntu0.18.04.1_amd64.deb
 
