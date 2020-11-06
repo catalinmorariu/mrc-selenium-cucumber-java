@@ -2,12 +2,16 @@ FROM openjdk:11.0.6-jdk-slim as builder
 
 WORKDIR /mnt/workspace
 
-# Prereq
+# Prereq Chrome
 RUN apt-get update
 RUN apt -y install wget
 RUN apt-get -y install -y unzip xvfb libxi6 libgconf-2-4
 
-# Install/ Update firefox
+# Install Chrome
+RUN wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+RUN apt -y install ./google-chrome-stable_current_amd64.deb
+
+#Prereq Firefox
 RUN apt update
 RUN apt-get -y --reinstall install lsb-release
 RUN apt-get -y install libatk-bridge2.0-0
@@ -20,15 +24,9 @@ RUN apt-get -y install libpangoft2-1.0-0
 RUN apt-get -y install libxcomposite1
 RUN apt-get -y install libxcursor1
 
-
-
+# Install/ Update firefox
 RUN wget http://archive.ubuntu.com/ubuntu/pool/main/f/firefox/firefox_82.0.2+build1-0ubuntu0.18.04.1_amd64.deb
 RUN dpkg -i firefox_82.0.2+build1-0ubuntu0.18.04.1_amd64.deb
-
-
-# Install Chrome
-RUN wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-RUN apt -y install ./google-chrome-stable_current_amd64.deb
 
 # create user (not root user is required to start elastic)
 RUN useradd -ms /bin/bash -g root bob && chown -R bob:root /mnt/workspace
@@ -50,7 +48,7 @@ COPY --chown=bob:root *.xml *.yaml /mnt/workspace/
 RUN ./mvnw dependency:go-offline -B --settings /mnt/workspace/mvn-settings.xml
 
 COPY --chown=bob:root src/main/config /mnt/workspace/src/main/config
-#RUN ./mvnw checkstyle:check pmd:pmd spotbugs:check -B --settings /mnt/workspace/mvn-settings.xml
+RUN ./mvnw checkstyle:check pmd:pmd spotbugs:check -B --settings /mnt/workspace/mvn-settings.xml
 
 COPY --chown=bob:root scripts /mnt/workspace/scripts
 COPY --chown=bob:root drivers /mnt/workspace/drivers
