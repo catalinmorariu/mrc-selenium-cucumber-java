@@ -11,3 +11,4 @@ Feature: MRC Login
     And I enter password into input field having id "password"
     When I click on element having id "submit"
     Then I wait for page loading but no more than 20 seconds
+    
