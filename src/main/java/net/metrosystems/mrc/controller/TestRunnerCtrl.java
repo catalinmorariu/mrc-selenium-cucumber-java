@@ -36,7 +36,7 @@ public class TestRunnerCtrl {
     }
 
     @RequestMapping(method = RequestMethod.GET, path = "runAllTests", produces = MediaType.TEXT_PLAIN_VALUE)
-    public synchronized ResponseEntity<String> startTestsVlad() {
+    public ResponseEntity<String> startTestsVlad() {
         LOG.info("Testing started at {}", new Date());
         boolean result = runAllTest();
         LOG.info("result: {}", result);
@@ -68,29 +68,29 @@ public class TestRunnerCtrl {
                 "features/"}, Thread.currentThread().getContextClassLoader()) == 0;
         }
 
-    private boolean runTests() {
-        byte result = 1;
-        try {
-            synchronized (TESTING_STATUS) {
-                if (TESTING_STATUS.getState() != TestingStatus.State.IN_PROGRESS) {
-                    TESTING_STATUS.setState(TestingStatus.State.IN_PROGRESS);
-                    System.setProperty("Headless", "true");
-                    result = Main.run(new String[] {
-                        "--glue",
-                        "net.metrosystems.mrc.seleniumcucumber.stepdefinitions",
-                        "features/"}, Thread.currentThread().getContextClassLoader());
-//                    System.setProperty("Headless", "false");
-                } else {
-                    LOG.error("Another test is in progress");
-                    //return false;
-                }
-            }
-            TESTING_STATUS.setState(TestingStatus.State.DONE);
-        } catch (Exception e) {
-            TESTING_STATUS.addException(e);
-            LOG.error("Exception ", e);
-            //return false;
-        }
-        return result == 0 ? true : false;
-    }
+//    private boolean runTests() {
+//        byte result = 1;
+//        try {
+//            synchronized (TESTING_STATUS) {
+//                if (TESTING_STATUS.getState() != TestingStatus.State.IN_PROGRESS) {
+//                    TESTING_STATUS.setState(TestingStatus.State.IN_PROGRESS);
+//                    System.setProperty("Headless", "true");
+//                    result = Main.run(new String[] {
+//                        "--glue",
+//                        "net.metrosystems.mrc.seleniumcucumber.stepdefinitions",
+//                        "features/"}, Thread.currentThread().getContextClassLoader());
+////                    System.setProperty("Headless", "false");
+//                } else {
+//                    LOG.error("Another test is in progress");
+//                    //return false;
+//                }
+//            }
+//            TESTING_STATUS.setState(TestingStatus.State.DONE);
+//        } catch (Exception e) {
+//            TESTING_STATUS.addException(e);
+//            LOG.error("Exception ", e);
+//            //return false;
+//        }
+//        return result == 0 ? true : false;
+//    }
 }
