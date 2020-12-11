@@ -66,9 +66,16 @@ public final class DriverUtil {
             if (headless) {
                 chromeOptions.addArguments("--headless");
             }
+            chromeOptions.addArguments("--no-sandbox"); //needed to run as root on ubuntu server
+            chromeOptions.addArguments("--incognito");
+            chromeOptions.addArguments("--disable-popup-blocking");
+            chromeOptions.addArguments("--disable-default-apps");
+            chromeOptions.addArguments("--disable-infobars");
+            chromeOptions.addArguments("--disable-extensions");
+            chromeOptions.addArguments("--disable-dev-shm-usage");
             capabilities.setCapability(ChromeOptions.CAPABILITY, chromeOptions);
             System.out.println("********************* before driver created");
-            ChromeDriver driver = new ChromeDriver();
+            ChromeDriver driver = new ChromeDriver(chromeOptions);
             System.out.println("********************* after driver created");
             ErrorHandler handler = new ErrorHandler();
             handler.setIncludeServerErrors(false);
