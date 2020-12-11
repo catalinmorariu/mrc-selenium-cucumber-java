@@ -32,7 +32,7 @@ public final class DriverUtil {
         if (driver == null) {
             synchronized (DriverUtil.class) {
                 if (driver == null) {
-                    System.setProperty("webdriver.chrome.driver", "/mnt/workspace/drivers/chromedriver");
+                    System.setProperty("webdriver.chrome.driver", "/usr/bin/chromedriver");
                     System.setProperty("webdriver.gecko.driver", Paths.get("drivers", "geckodriver-custom").toString());
                     DesiredCapabilities capabilities = null;
                     capabilities = DesiredCapabilities.firefox();
