@@ -58,7 +58,7 @@ public final class DriverUtil {
      * @return
      */
     private static WebDriver chooseDriver(DesiredCapabilities capabilities) {
-        String preferredDriver = System.getProperty("browser", "firefox");
+        String preferredDriver = System.getProperty("browser", "chrome");
         boolean headless = System.getProperty("Headless", "true").equals("true");
 
         if ("chrome".equals(preferredDriver.toLowerCase(Locale.ROOT))) {

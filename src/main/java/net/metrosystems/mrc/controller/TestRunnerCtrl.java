@@ -37,19 +37,12 @@ public class TestRunnerCtrl {
         }
     }
 
-    @RequestMapping(method = RequestMethod.GET, path = "testing", produces = MediaType.TEXT_PLAIN_VALUE)
-    public ResponseEntity<String> startTests() {
-        LOG.info("Testing started at {}", new Date());
-        CompletableFuture.runAsync(this::runTests);
-        return new ResponseEntity<>("Started", HttpStatus.OK);
-    }
-
-    @RequestMapping(method = RequestMethod.GET, path = "testing-vlad", produces = MediaType.TEXT_PLAIN_VALUE)
+    @RequestMapping(method = RequestMethod.GET, path = "runAllTests", produces = MediaType.TEXT_PLAIN_VALUE)
     public synchronized ResponseEntity<String> startTestsVlad() {
         LOG.info("Testing started at {}", new Date());
-        boolean result = this.runTests();
+        boolean result = runAllTest();
         LOG.info("result: {}", result);
-        return result ? new ResponseEntity<>("Passed", HttpStatus.OK) : new ResponseEntity<>("Failed", HttpStatus.FOUND);
+        return result ? new ResponseEntity<>("Passed", HttpStatus.OK) : new ResponseEntity<>("Failed", HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     @RequestMapping(method = RequestMethod.GET, path = "testing/reportsCheck", produces = MediaType.TEXT_PLAIN_VALUE)
@@ -69,6 +62,14 @@ public class TestRunnerCtrl {
         //System.setProperty("Headless", "false");
         }
 
+        private boolean runAllTest() {
+            System.setProperty("Headless", "true");
+            return Main.run(new String[] {
+                "--glue",
+                "net.metrosystems.mrc.seleniumcucumber.stepdefinitions",
+                "features/"}, Thread.currentThread().getContextClassLoader()) == 0;
+        }
+
     private boolean runTests() {
         byte result = 1;
         try {
@@ -80,7 +81,7 @@ public class TestRunnerCtrl {
                         "--glue",
                         "net.metrosystems.mrc.seleniumcucumber.stepdefinitions",
                         "features/"}, Thread.currentThread().getContextClassLoader());
-                    System.setProperty("Headless", "false");
+//                    System.setProperty("Headless", "false");
                 } else {
                     LOG.error("Another test is in progress");
                     //return false;
