@@ -277,6 +277,7 @@
                     <rulesets>
                         <ruleset>${project.basedir}/src/main/config/pmd/ruleset.xml</ruleset>
                     </rulesets>
+                    <printFailingErrors>true</printFailingErrors>
                     <analysisCache>true</analysisCache>
                     <analysisCacheLocation>${project.build.directory}/pmd/pmd.cache</analysisCacheLocation>
                     <includeTests>true</includeTests>
