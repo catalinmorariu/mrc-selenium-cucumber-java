@@ -32,7 +32,7 @@ public final class DriverUtil {
         if (driver == null) {
             synchronized (DriverUtil.class) {
                 if (driver == null) {
-                    //System.setProperty("webdriver.chrome.driver", "webdrivers/chromedriver.exe");
+                    System.setProperty("webdriver.chrome.driver", "webdrivers/chromedriver.exe");
                     System.setProperty("webdriver.gecko.driver", Paths.get("drivers", "geckodriver-custom").toString());
                     DesiredCapabilities capabilities = null;
                     capabilities = DesiredCapabilities.firefox();
@@ -58,7 +58,7 @@ public final class DriverUtil {
      * @return
      */
     private static WebDriver chooseDriver(DesiredCapabilities capabilities) {
-        String preferredDriver = System.getProperty("browser", "chrome");
+        String preferredDriver = System.getProperty("browser", "firefox");
         boolean headless = System.getProperty("Headless", "true").equals("true");
 
         if ("chrome".equals(preferredDriver.toLowerCase(Locale.ROOT))) {
@@ -78,7 +78,6 @@ public final class DriverUtil {
                 return new PhantomJSDriver(capabilities);*/
         }
         FirefoxOptions options = new FirefoxOptions();
-        //capabilities.s
         if (headless) {
             options.addArguments("-headless", "-safe-mode");
         }

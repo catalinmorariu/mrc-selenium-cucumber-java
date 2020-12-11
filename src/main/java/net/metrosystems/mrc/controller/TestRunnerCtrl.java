@@ -1,6 +1,8 @@
 package net.metrosystems.mrc.controller;
 
-import io.cucumber.core.cli.Main;
+import java.util.Date;
+import java.util.concurrent.CompletableFuture;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -10,9 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import java.util.Date;
-import java.util.Map;
-import java.util.concurrent.CompletableFuture;
+
+import io.cucumber.core.cli.Main;
 
 @RestController
 public class TestRunnerCtrl {
@@ -36,17 +37,21 @@ public class TestRunnerCtrl {
         }
     }
 
-    @RequestMapping(method = RequestMethod.GET, path = "testingStatus", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Map<String, String>> getMigrationStatus() {
-        return new ResponseEntity<>(TESTING_STATUS.toMap(), HttpStatus.OK);
-    }
-
     @RequestMapping(method = RequestMethod.GET, path = "testing", produces = MediaType.TEXT_PLAIN_VALUE)
     public ResponseEntity<String> startTests() {
         LOG.info("Testing started at {}", new Date());
         CompletableFuture.runAsync(this::runTests);
         return new ResponseEntity<>("Started", HttpStatus.OK);
     }
+
+    @RequestMapping(method = RequestMethod.GET, path = "testing-vlad", produces = MediaType.TEXT_PLAIN_VALUE)
+    public synchronized ResponseEntity<String> startTestsVlad() {
+        LOG.info("Testing started at {}", new Date());
+        boolean result = this.runTests();
+        LOG.info("result: {}", result);
+        return result ? new ResponseEntity<>("Passed", HttpStatus.OK) : new ResponseEntity<>("Failed", HttpStatus.FOUND);
+    }
+
     @RequestMapping(method = RequestMethod.GET, path = "testing/reportsCheck", produces = MediaType.TEXT_PLAIN_VALUE)
     public ResponseEntity<String> startSpecificTest() {
         LOG.info("Testing started at {}", new Date());
@@ -55,38 +60,38 @@ public class TestRunnerCtrl {
     }
 
     private void runFirstTest() {
-        System.setProperty("Headless", "true");
+        //System.setProperty("Headless", "true");
         Main.main(new String[] {
             "--glue",
             "net.metrosystems.mrc.seleniumcucumber.stepdefinitions",
             "features/001_Reports check.feature"}
         );
-        System.setProperty("Headless", "false");
+        //System.setProperty("Headless", "false");
         }
 
     private boolean runTests() {
+        byte result = 1;
         try {
             synchronized (TESTING_STATUS) {
                 if (TESTING_STATUS.getState() != TestingStatus.State.IN_PROGRESS) {
                     TESTING_STATUS.setState(TestingStatus.State.IN_PROGRESS);
                     System.setProperty("Headless", "true");
-                    Main.main(new String[] {
+                    result = Main.run(new String[] {
                         "--glue",
                         "net.metrosystems.mrc.seleniumcucumber.stepdefinitions",
-                        "features/"}
-                    );
+                        "features/"}, Thread.currentThread().getContextClassLoader());
                     System.setProperty("Headless", "false");
                 } else {
                     LOG.error("Another test is in progress");
-                    return false;
+                    //return false;
                 }
             }
             TESTING_STATUS.setState(TestingStatus.State.DONE);
         } catch (Exception e) {
             TESTING_STATUS.addException(e);
             LOG.error("Exception ", e);
-            return false;
+            //return false;
         }
-        return true;
+        return result == 0 ? true : false;
     }
 }
