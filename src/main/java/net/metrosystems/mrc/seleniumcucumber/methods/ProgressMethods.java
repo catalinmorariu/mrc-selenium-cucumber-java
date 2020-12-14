@@ -52,7 +52,7 @@ public class ProgressMethods extends SelectElementByType {
      */
     public void waitForPageToLoad(int duration) {
         new WebDriverWait(driver, duration).until(
-            webDriver -> ((JavascriptExecutor) webDriver)
-                .executeScript("return document.readyState").equals("complete"));
+            webDriver -> "complete".equals(((JavascriptExecutor) webDriver)
+                .executeScript("return document.readyState")));
     }
 }

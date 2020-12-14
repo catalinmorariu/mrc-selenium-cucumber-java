@@ -34,8 +34,7 @@ public final class DriverUtil {
                 if (driver == null) {
                     System.setProperty("webdriver.chrome.driver", "/usr/bin/chromedriver");
                     System.setProperty("webdriver.gecko.driver", Paths.get("drivers", "geckodriver-custom").toString());
-                    DesiredCapabilities capabilities = null;
-                    capabilities = DesiredCapabilities.firefox();
+                    DesiredCapabilities capabilities = DesiredCapabilities.firefox();
                     capabilities.setJavascriptEnabled(true);
                     capabilities.setCapability("takesScreenshot", true);
                     final WebDriver chosenDriver = chooseDriver(capabilities);
@@ -59,7 +58,7 @@ public final class DriverUtil {
      */
     private static WebDriver chooseDriver(DesiredCapabilities capabilities) {
         String preferredDriver = System.getProperty("browser", "chrome");
-        boolean headless = System.getProperty("Headless", "true").equals("true");
+        boolean headless = "true".equals(System.getProperty("Headless", "true"));
 
         if ("chrome".equals(preferredDriver.toLowerCase(Locale.ROOT))) {
             final ChromeOptions chromeOptions = new ChromeOptions();

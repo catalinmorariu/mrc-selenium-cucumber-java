@@ -274,7 +274,7 @@ public class AssertionMethods extends SelectElementByType {
                     throw new TestCaseFailed("Present"); //since it is negative test and we found element
                 }
             } catch (Exception e) {
-                if (e.getMessage().equals("Present")) {
+                if ("Present".equals(e.getMessage())) {
                     System.out.println("Element Present issue");
                 }
                 throw new RuntimeException(e);
@@ -369,11 +369,9 @@ public class AssertionMethods extends SelectElementByType {
      * @throws TestCaseFailed
      */
     public void isOptionFromDropdownSelected(String accessType, String by, String option, String accessName, boolean shouldBeSelected) throws TestCaseFailed {
-        Select selectList = null;
         WebElement dropdown = wait.until(ExpectedConditions.presenceOfElementLocated(getElementByType(accessType, accessName)));
-        selectList = new Select(dropdown);
-
-        String actualValue = "";
+        Select selectList = new Select(dropdown);
+        String actualValue;
         if ("text".equals(by)) {
             actualValue = selectList.getFirstSelectedOption().getText();
         } else {
