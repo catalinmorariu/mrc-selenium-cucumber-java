@@ -2,7 +2,7 @@ Feature: Reports check
 
   Scenario: Prerequisites
   Given I want to test against "https://mrc-pp.metrosystems.net/"
-  And I want to use user "test.user@metro.digital" with password "Mc.074438!"
+  And I want to use user "test.user@metrosystems.net" with password "Mc.074438!"
   And I want to use default timeout 20 seconds for each operation
 
   Scenario: I login with valid credential
