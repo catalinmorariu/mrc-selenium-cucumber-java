@@ -37,37 +37,10 @@ COPY --chown=bob:root scripts /mnt/workspace/scripts
 COPY --chown=bob:root src /mnt/workspace/src
 RUN ./scripts/build.sh
 
-FROM adoptopenjdk/openjdk11:jdk-11.0.5_10-alpine-slim
+FROM openjdk:11.0.6-jdk-slim
 
 # bash is required for run.sh
-RUN apk update && apk add bash \
-     alsa-lib \
-     at-spi2-atk \
-     atk \
-     cairo \
-     cups-libs \
-     dbus-libs \
-     eudev-libs \
-     expat \
-     flac \
-     gdk-pixbuf \
-     glib \
-     libgcc \
-     libjpeg-turbo \
-     libpng \
-     libwebp \
-     libx11 \
-     libxcomposite \
-     libxdamage \
-     libxext \
-     libxfixes \
-     tzdata \
-     libexif \
-     udev \
-     xvfb \
-     zlib-dev \
-     chromium \
-     chromium-chromedriver
+
 
 ENV DRP_CF_VERSION caaeb91
 COPY scripts/run.sh /run.sh
