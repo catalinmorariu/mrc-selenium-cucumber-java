@@ -6,6 +6,7 @@ import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.SelenideElement;
 import com.codeborne.selenide.WebDriverRunner;
 import io.cucumber.java.en.Then;
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
@@ -33,6 +34,7 @@ public class UserStepDefinitions {
             // Loading properties file from the path (relative path given here)
             USER_PASS.load(iStream);
             Configuration.headless = true;
+            WebDriverManager.chromedriver().forceDownload().setup();
         } catch (IOException e) {
             e.printStackTrace();
         }
