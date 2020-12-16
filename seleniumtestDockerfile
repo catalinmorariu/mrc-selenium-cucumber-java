@@ -37,11 +37,10 @@ COPY --chown=bob:root scripts /mnt/workspace/scripts
 COPY --chown=bob:root src /mnt/workspace/src
 RUN ./scripts/build.sh
 
-FROM registry.metroscales.io/mrc/builderspring24:18_11_2020
+FROM registry.metroscales.io/mrc/basebuilder:01_10_2020_01
 USER root
 WORKDIR /
-RUN apt-get update \
-    && apt-get -y install unzip
+RUN apt-get -y install unzip
 
 ENV DRP_CF_VERSION caaeb91
 COPY scripts/run.sh /run.sh
