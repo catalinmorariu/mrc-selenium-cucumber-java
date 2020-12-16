@@ -35,7 +35,8 @@ public class UserStepDefinitions {
             USER_PASS.load(iStream);
             Configuration.headless = true;
             WebDriverManager.chromedriver().browserPath("drivers/chromedriver");
-            Configuration.baseUrl = "http://" + System.getenv("DRP_CF_KUBERNETES_NAMESPACE") + "-" + System.getenv("DRP_CF_INGRESS_HOST");
+            Configuration.baseUrl = "http://" + System.getenv("DRP_CF_KUBERNETES_NAMESPACE")
+                + "-" + System.getenv("DRP_CF_SERVICE") + "." + System.getenv("DRP_CF_INGRESS_HOST");
         } catch (IOException e) {
             e.printStackTrace();
         }
