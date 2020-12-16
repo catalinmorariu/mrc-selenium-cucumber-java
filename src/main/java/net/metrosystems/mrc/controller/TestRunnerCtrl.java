@@ -17,6 +17,7 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.UUID;
 
 @RestController()
 public class TestRunnerCtrl {
@@ -56,16 +57,15 @@ public class TestRunnerCtrl {
     @RequestMapping(method = RequestMethod.GET, path = "testing/reportsCheck", produces = MediaType.TEXT_PLAIN_VALUE)
     public ResponseEntity<String> startSpecificTest() {
         LOG.info("Testing started at {}", new Date());
-        this.runFirstTest();
-        return new ResponseEntity<>("Started", HttpStatus.OK);
+        String uuid = UUID.randomUUID().toString();
+        this.runFirstTest(uuid);
+        return new ResponseEntity<>(uuid, HttpStatus.OK);
     }
 
-    private void runFirstTest() {
-        //System.setProperty("Headless", "true");
-        startProcess("--glue",
-            "net.metrosystems.mrc.stepdefinitions",
-            "features/001_Login");
-        //System.setProperty("Headless", "false");
+    private void runFirstTest(String uuid) {
+        startProcess(
+            "--plugin", "html:build/cucumber-reports_" + uuid + ".html",
+            "features/");
     }
 
     private void startProcess(String... args) {
@@ -95,8 +95,6 @@ public class TestRunnerCtrl {
 
     private boolean runAllTest() {
         return Main.run(new String[]{
-            "--glue",
-            "net.metrosystems.mrc.seleniumcucumber.stepdefinitions",
             "features/"}, Thread.currentThread().getContextClassLoader()) == 0;
     }
 
