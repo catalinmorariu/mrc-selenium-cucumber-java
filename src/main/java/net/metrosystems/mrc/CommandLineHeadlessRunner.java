@@ -10,6 +10,7 @@ public final class CommandLineHeadlessRunner {
     public static void main(String[] args) {
         System.setProperty("selenide.headless", "true");
         Configuration.headless = true;
+        Configuration.browserBinary = "drivers/chromedriver";
         Main.main(args);
     }
 }

@@ -1,5 +1,6 @@
 package net.metrosystems.mrc;
 
+import com.codeborne.selenide.Configuration;
 import io.cucumber.core.cli.Main;
 
 public final class CommandLineRunner {
@@ -7,6 +8,7 @@ public final class CommandLineRunner {
     }
 
     public static void main(String[] args) {
+        Configuration.browserBinary = "drivers/chromedriver";
         Main.main(args);
     }
 
