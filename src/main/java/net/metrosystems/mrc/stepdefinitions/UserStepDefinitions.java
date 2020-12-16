@@ -34,7 +34,7 @@ public class UserStepDefinitions {
             // Loading properties file from the path (relative path given here)
             USER_PASS.load(iStream);
             Configuration.headless = true;
-            WebDriverManager.chromedriver().forceDownload().setup();
+            WebDriverManager.chromedriver().browserPath("drivers/chromedriver");
         } catch (IOException e) {
             e.printStackTrace();
         }
