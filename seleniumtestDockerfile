@@ -39,6 +39,7 @@ RUN ./scripts/build.sh
 
 FROM registry.metroscales.io/mrc/builderspring24:18_11_2020
 USER root
+WORKDIR /
 RUN apt-get update \
     && apt-get -y install unzip
 
