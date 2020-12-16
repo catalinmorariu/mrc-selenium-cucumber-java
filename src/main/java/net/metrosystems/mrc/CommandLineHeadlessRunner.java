@@ -3,7 +3,7 @@ package net.metrosystems.mrc;
 import com.codeborne.selenide.Configuration;
 import io.cucumber.core.cli.Main;
 
-public class CommandLineHeadlessRunner {
+public final class CommandLineHeadlessRunner {
     private CommandLineHeadlessRunner() {
     }
 
