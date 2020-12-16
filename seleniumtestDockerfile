@@ -38,6 +38,7 @@ COPY --chown=bob:root src /mnt/workspace/src
 RUN ./scripts/build.sh
 
 FROM registry.metroscales.io/mrc/builderspring24:18_11_2020
+USER root
 RUN apt-get update \
     && apt-get -y install unzip
 
