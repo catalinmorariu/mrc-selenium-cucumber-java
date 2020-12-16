@@ -37,37 +37,10 @@ COPY --chown=bob:root scripts /mnt/workspace/scripts
 COPY --chown=bob:root src /mnt/workspace/src
 RUN ./scripts/build.sh
 
-FROM adoptopenjdk/openjdk11:jdk-11.0.5_10-alpine-slim
-
-# bash is required for run.sh
-RUN apk update && apk add bash \
-     alsa-lib \
-     at-spi2-atk \
-     atk \
-     cairo \
-     cups-libs \
-     dbus-libs \
-     eudev-libs \
-     expat \
-     flac \
-     gdk-pixbuf \
-     glib \
-     libgcc \
-     libjpeg-turbo \
-     libpng \
-     libwebp \
-     libx11 \
-     libxcomposite \
-     libxdamage \
-     libxext \
-     libxfixes \
-     tzdata \
-     libexif \
-     udev \
-     xvfb \
-     zlib-dev \
-     chromium \
-     chromium-chromedriver
+FROM registry.metroscales.io/mrc/basebuilder:01_10_2020_01
+USER root
+WORKDIR /
+RUN apt-get -y install unzip
 
 ENV DRP_CF_VERSION caaeb91
 COPY scripts/run.sh /run.sh

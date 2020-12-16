@@ -15,14 +15,9 @@ public final class CommandLineHeadlessRunner {
         Configuration.headless = true;
         Configuration.browser = Browsers.CHROME;
         ChromeOptions options = new ChromeOptions();
-        options.addArguments("--disable-extensions");
-        options.addArguments("--headless");
-        options.addArguments("--no-sandbox");
-        options.addArguments("disable-infobars"); // disabling infobars
-        options.addArguments("--disable-extensions"); // disabling extensions
-        options.addArguments("--disable-gpu"); // applicable to windows os only
-        options.addArguments("--disable-dev-shm-usage");
-        options.addArguments("--window-size=1920,1080");
+        options.addArguments("--disable-extensions", "--headless",
+            "--no-sandbox", "disable-infobars", "--disable-extensions",
+            "--disable-gpu", "--disable-dev-shm-usage");
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setCapability(ChromeOptions.CAPABILITY, options);
         Configuration.browserCapabilities = capabilities;
