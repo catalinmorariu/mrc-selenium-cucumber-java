@@ -1,5 +1,6 @@
 package net.metrosystems.mrc;
 
+import com.codeborne.selenide.Browsers;
 import com.codeborne.selenide.Configuration;
 import io.cucumber.core.cli.Main;
 
@@ -8,7 +9,7 @@ public final class CommandLineRunner {
     }
 
     public static void main(String[] args) {
-        Configuration.browserBinary = "drivers/chromedriver";
+        Configuration.browser = Browsers.FIREFOX;
         Main.main(args);
     }
 
