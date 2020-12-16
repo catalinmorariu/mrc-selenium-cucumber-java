@@ -37,10 +37,7 @@ COPY --chown=bob:root scripts /mnt/workspace/scripts
 COPY --chown=bob:root src /mnt/workspace/src
 RUN ./scripts/build.sh
 
-FROM openjdk:11.0.6-jdk-slim
-
-# bash is required for run.sh
-RUN apt-get -y install -y unzip xvfb libxi6 libgconf-2-4
+FROM registry.metroscales.io/mrc/builderspring24:18_11_2020
 
 ENV DRP_CF_VERSION caaeb91
 COPY scripts/run.sh /run.sh
