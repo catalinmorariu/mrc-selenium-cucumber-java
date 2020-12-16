@@ -6,7 +6,6 @@ import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.SelenideElement;
 import com.codeborne.selenide.WebDriverRunner;
 import io.cucumber.java.en.Then;
-import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
