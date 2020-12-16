@@ -3,8 +3,6 @@ package net.metrosystems.mrc;
 import com.codeborne.selenide.Browsers;
 import com.codeborne.selenide.Configuration;
 import io.cucumber.core.cli.Main;
-import org.openqa.selenium.Capabilities;
-import org.openqa.selenium.remote.DesiredCapabilities;
 
 public final class CommandLineHeadlessRunner {
     private CommandLineHeadlessRunner() {
