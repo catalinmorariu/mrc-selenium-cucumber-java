@@ -12,7 +12,7 @@ public final class CommandLineHeadlessRunner {
         System.setProperty("selenide.headless", "true");
         Configuration.headless = true;
         Configuration.browser = Browsers.FIREFOX;
-        Configuration.browserBinary = "drivers/geckodriver-custom";
+        Configuration.browserBinary = "drivers/geckodriver";
         Configuration.baseUrl = "http://" + System.getenv("DRP_CF_KUBERNETES_NAMESPACE")
             + "-" + System.getenv("DRP_CF_SERVICE") + "." + System.getenv("DRP_CF_INGRESS_HOST");
         Main.main(args);
