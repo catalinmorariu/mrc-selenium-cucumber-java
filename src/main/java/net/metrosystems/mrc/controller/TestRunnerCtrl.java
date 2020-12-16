@@ -1,6 +1,7 @@
 package net.metrosystems.mrc.controller;
 
 import io.cucumber.core.cli.Main;
+import net.metrosystems.mrc.CommandLineHeadlessRunner;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -11,9 +12,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.io.File;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.LinkedList;
+import java.util.List;
 
-@RestController
+@RestController()
 public class TestRunnerCtrl {
     private static final Logger LOG = LoggerFactory.getLogger(TestRunnerCtrl.class);
     private static final TestingStatus TESTING_STATUS = new TestingStatus();
@@ -35,6 +40,11 @@ public class TestRunnerCtrl {
         }
     }
 
+    @RequestMapping("/")
+    public String home() {
+        return "Hello World!";
+    }
+
     @RequestMapping(method = RequestMethod.GET, path = "runAllTests", produces = MediaType.TEXT_PLAIN_VALUE)
     public ResponseEntity<String> startTestsVlad() {
         LOG.info("Testing started at {}", new Date());
@@ -52,21 +62,43 @@ public class TestRunnerCtrl {
 
     private void runFirstTest() {
         //System.setProperty("Headless", "true");
-        Main.main(new String[] {
+        startProcess("--glue",
+            "net.metrosystems.mrc.stepdefinitions",
+            "features/001_Login");
+        //System.setProperty("Headless", "false");
+    }
+
+    private void startProcess(String... args) {
+        try {
+            String javaHome = System.getProperty("java.home");
+            String javaBin = javaHome +
+                File.separator + "bin" +
+                File.separator + "java";
+            String classpath = System.getProperty("java.class.path");
+            String className = CommandLineHeadlessRunner.class.getCanonicalName();
+
+            List<String> command = new LinkedList<>();
+            command.add(javaBin);
+            command.add("-cp");
+            command.add(classpath);
+            command.add(className);
+            command.addAll(Arrays.asList(args));
+            ProcessBuilder builder = new ProcessBuilder(command);
+
+            Process process = builder.inheritIO().start();
+            process.waitFor();
+            LOG.info("exit value: {}", process.exitValue());
+        } catch (Exception e) {
+            LOG.error("Exception ", e);
+        }
+    }
+
+    private boolean runAllTest() {
+        return Main.run(new String[]{
             "--glue",
             "net.metrosystems.mrc.seleniumcucumber.stepdefinitions",
-            "features/001_Reports check.feature"}
-        );
-        //System.setProperty("Headless", "false");
-        }
-
-        private boolean runAllTest() {
-            System.setProperty("Headless", "true");
-            return Main.run(new String[] {
-                "--glue",
-                "net.metrosystems.mrc.seleniumcucumber.stepdefinitions",
-                "features/"}, Thread.currentThread().getContextClassLoader()) == 0;
-        }
+            "features/"}, Thread.currentThread().getContextClassLoader()) == 0;
+    }
 
 //    private boolean runTests() {
 //        byte result = 1;
