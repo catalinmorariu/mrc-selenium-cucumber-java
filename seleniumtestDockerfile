@@ -72,7 +72,7 @@ RUN apk update && apk add bash \
 ENV DRP_CF_VERSION caaeb91
 COPY scripts/run.sh /run.sh
 COPY features features
-COPY drivers /mnt/workspace/drivers
+COPY drivers drivers
 COPY --from=builder /mnt/workspace/target/mrc-selenium-cucumber-java-0.0.1.jar /
 RUN bash -c 'unzip -q "mrc-selenium-cucumber-java-0.0.1.jar"'
 RUN rm /mrc-selenium-cucumber-java-0.0.1.jar
