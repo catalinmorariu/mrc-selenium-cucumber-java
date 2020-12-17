@@ -16,6 +16,7 @@ import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
 import static com.codeborne.selenide.Condition.text;
+import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
 import static com.codeborne.selenide.Selenide.closeWebDriver;
@@ -94,10 +95,28 @@ public class UserStepDefinitions {
             .shouldBe(CollectionCondition.anyMatch("reportTile",
                 webElement -> {
                     href[0] = webElement.getAttribute("href");
-                    return href[0] != null && href[0].endsWith(tileName);
+                    return href[0] != null && href[0].contains(tileName);
                 }));
         open(href[0]);
 
+    }
+
+    @Then("^enter \"([^\"]*)\" into \"([^\"]*)\"$")
+    public void enterValue2ElementWithId(String value, String id) {
+        $(By.id(id)).shouldBe(visible).setValue(value).pressEnter();
+    }
+
+    @Then("^look for \"([^\"]*)\" among results and pick it$")
+    public void enterValue2ElementWithId(String searcheValue) {
+        String[] href = new String[1];
+        $$(".mrc-search-result")
+            .shouldBe(CollectionCondition.anyMatch("search item",
+                webElement -> {
+                    WebElement link = webElement.findElement(By.tagName("a"));
+                    href[0] = link.getAttribute("href");
+                    return href[0] != null && href[0].endsWith(searcheValue);
+                })).first().shouldBe(visible);
+        open(href[0]);
     }
 
     @Then("^close$")

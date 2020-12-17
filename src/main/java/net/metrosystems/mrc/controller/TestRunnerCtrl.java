@@ -1,7 +1,7 @@
 package net.metrosystems.mrc.controller;
 
 import io.cucumber.core.cli.Main;
-import net.metrosystems.mrc.CommandLineHeadlessRunner;
+import net.metrosystems.mrc.KubernetesHeadlessRunner;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -75,7 +75,7 @@ public class TestRunnerCtrl {
                 File.separator + "bin" +
                 File.separator + "java";
             String classpath = System.getProperty("java.class.path");
-            String className = CommandLineHeadlessRunner.class.getCanonicalName();
+            String className = KubernetesHeadlessRunner.class.getCanonicalName();
 
             List<String> command = new LinkedList<>();
             command.add(javaBin);

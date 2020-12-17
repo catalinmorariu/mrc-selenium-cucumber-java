@@ -11,9 +11,9 @@ import org.slf4j.LoggerFactory;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public final class CommandLineHeadlessRunner {
-    private static final Logger LOG = LoggerFactory.getLogger(CommandLineHeadlessRunner.class);
-    private CommandLineHeadlessRunner() {
+public final class KubernetesHeadlessRunner {
+    private static final Logger LOG = LoggerFactory.getLogger(KubernetesHeadlessRunner.class);
+    private KubernetesHeadlessRunner() {
     }
 
     public static void main(String[] args) {
