@@ -1,13 +1,11 @@
 package net.metrosystems.mrc.stepdefinitions;
 
-import com.codeborne.selenide.CollectionCondition;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.SelenideElement;
 import com.codeborne.selenide.WebDriverRunner;
 import io.cucumber.java.en.Then;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -15,10 +13,8 @@ import java.util.Properties;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
-import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.$$;
 import static com.codeborne.selenide.Selenide.closeWebDriver;
 import static com.codeborne.selenide.Selenide.open;
 
@@ -33,7 +29,6 @@ public class UserStepDefinitions {
         try (InputStream iStream = Thread.currentThread().getContextClassLoader().getResourceAsStream("users.properties")) {
             // Loading properties file from the path (relative path given here)
             USER_PASS.load(iStream);
-            Configuration.headless = true;
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -78,8 +73,6 @@ public class UserStepDefinitions {
 
     @Then("^Idam login if required for \"([^\"]*)\" as user and \"([^\"]*)\" as password and \"([^\"]*)\"$")
     public void login(String userId, String passId, String submit) {
-        Configuration.headless = false;
-
         open(host);
         if (!WebDriverRunner.url().startsWith(host)) {
             setValue(By.id(userId), user, SelenideElement::setValue);
@@ -88,57 +81,15 @@ public class UserStepDefinitions {
         }
     }
 
-    @Then("^go to \"([^\"]*)\" tile at launchpad$")
-    public void gotToTile(String tileName) {
-        String[] href = new String[1];
-        $$(".mrc-tile")
-            .shouldBe(CollectionCondition.anyMatch("reportTile",
-                webElement -> {
-                    href[0] = webElement.getAttribute("href");
-                    return href[0] != null && href[0].contains(tileName);
-                }));
-        open(href[0]);
-
-    }
-
     @Then("^enter \"([^\"]*)\" into \"([^\"]*)\"$")
     public void enterValue2ElementWithId(String value, String id) {
         $(By.id(id)).shouldBe(visible).setValue(value).pressEnter();
-    }
-
-    @Then("^look for \"([^\"]*)\" among results and pick it$")
-    public void enterValue2ElementWithId(String searchedValue) {
-        String[] href = new String[1];
-        $$(".mrc-search-result")
-            .shouldBe(CollectionCondition.anyMatch("search item",
-                webElement -> {
-                    WebElement link = webElement.findElement(By.tagName("a"));
-                    href[0] = link.getAttribute("href");
-                    return href[0] != null && href[0].endsWith(searchedValue);
-                })).first().shouldBe(visible);
-        open(href[0]);
     }
 
     @Then("^close$")
     public void close() {
         closeWebDriver();
     }
-
-    @Then("^go to report \"([^\"]*)\" and wait$")
-    public void goToReport(String reportName) {
-        String[] text = new String[1];
-        WebElement[] link = new WebElement[1];
-        $$(".mrc-ui-report")
-            .shouldBe(CollectionCondition.anyMatch("report", webElement -> {
-                WebElement textElem = webElement.findElement(By.cssSelector(".mrc-ui-report-text"));
-                text[0] = textElem.getText();
-                link[0] = webElement.findElement(By.tagName("a"));
-                return text[0] != null && text[0].startsWith(reportName);
-            }));
-        link[0].click();
-        $(".mrc-iframe").shouldHave(text(text[0]));
-    }
-
 
     private static void click(By by, Consumer<SelenideElement> consumer) {
         SelenideElement userIdField = $(by);
