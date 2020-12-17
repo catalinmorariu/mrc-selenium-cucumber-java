@@ -107,14 +107,14 @@ public class UserStepDefinitions {
     }
 
     @Then("^look for \"([^\"]*)\" among results and pick it$")
-    public void enterValue2ElementWithId(String searcheValue) {
+    public void enterValue2ElementWithId(String searchedValue) {
         String[] href = new String[1];
         $$(".mrc-search-result")
             .shouldBe(CollectionCondition.anyMatch("search item",
                 webElement -> {
                     WebElement link = webElement.findElement(By.tagName("a"));
                     href[0] = link.getAttribute("href");
-                    return href[0] != null && href[0].endsWith(searcheValue);
+                    return href[0] != null && href[0].endsWith(searchedValue);
                 })).first().shouldBe(visible);
         open(href[0]);
     }
