@@ -26,6 +26,7 @@
         <jackson.version>2.11.3</jackson.version>
         <jackson-databind.version>2.11.3</jackson-databind.version>
         <java.version>11</java.version>
+        <java-uuid-generator.version>4.0.1</java-uuid-generator.version>
         <logstash-logback-encoder.version>6.4</logstash-logback-encoder.version>
         <maven-checkstyle-plugin.version>3.1.1</maven-checkstyle-plugin.version>
         <maven.compiler.release>${java.version}</maven.compiler.release>
@@ -101,6 +102,11 @@
             <version>${cucumber.version}</version>
         </dependency>
 
+        <dependency>
+            <groupId>com.fasterxml.uuid</groupId>
+            <artifactId>java-uuid-generator</artifactId>
+            <version>${java-uuid-generator.version}</version>
+        </dependency>
         <dependency>
             <groupId>io.cucumber</groupId>
             <artifactId>cucumber-java</artifactId>

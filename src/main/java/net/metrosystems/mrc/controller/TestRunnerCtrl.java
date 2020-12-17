@@ -1,5 +1,6 @@
 package net.metrosystems.mrc.controller;
 
+import com.fasterxml.uuid.Generators;
 import io.cucumber.core.cli.Main;
 import net.metrosystems.mrc.KubernetesHeadlessRunner;
 import org.slf4j.Logger;
@@ -17,7 +18,6 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.UUID;
 
 @RestController()
 public class TestRunnerCtrl {
@@ -57,7 +57,7 @@ public class TestRunnerCtrl {
     @RequestMapping(method = RequestMethod.GET, path = "testing/reportsCheck", produces = MediaType.TEXT_PLAIN_VALUE)
     public ResponseEntity<String> startSpecificTest() {
         LOG.info("Testing started at {}", new Date());
-        String uuid = UUID.randomUUID().toString();
+        String uuid = Generators.timeBasedGenerator().generate().toString();
         this.runFirstTest(uuid);
         return new ResponseEntity<>(uuid, HttpStatus.OK);
     }
