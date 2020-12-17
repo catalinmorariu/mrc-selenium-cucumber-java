@@ -22,3 +22,10 @@ management:
     diskspace.enabled: true
   metrics:
     export.datadog.enabled: false
+
+security:
+  basic:
+    enabled: true
+  user:
+    name: ${MRC_SERVICE_BASIC_AUTH_USER:metro}
+    password: ${MRC_SERVICE_BASIC_AUTH_PASS:metro}
