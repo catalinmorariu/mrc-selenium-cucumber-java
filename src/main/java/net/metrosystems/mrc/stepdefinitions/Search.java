@@ -6,12 +6,14 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 import static com.codeborne.selenide.Condition.visible;
+import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
 import static com.codeborne.selenide.Selenide.open;
 
-public class SearchSteps {
-    @Then("^look for \"([^\"]*)\" among results and pick it$")
-    public void enterValue2ElementWithId(String searchedValue) {
+public class Search {
+    @Then("enter {string} into {string} and pick it from the list")
+    public void enterValue2ElementWithId(String searchedValue, String searchId) {
+        $(By.id(searchId)).shouldBe(visible).setValue(searchedValue).pressEnter();
         String[] href = new String[1];
         $$(".mrc-search-result")
             .shouldBe(CollectionCondition.anyMatch("search item",

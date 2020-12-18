@@ -11,7 +11,8 @@ public final class LocalHostRunner {
     public static void main(String[] args) {
         Configuration.browser = Browsers.CHROME;
         Configuration.holdBrowserOpen = true;
-        System.setProperty("chromeoptions.mobileEmulation", "deviceName=Nexus 5");
-        Main.main("features/");
+        Configuration.clickViaJs = true;
+       // System.setProperty("chromeoptions.mobileEmulation", "deviceName=Nexus 5");
+        Main.main("features/002_CreditLimit/001_Block case.feature");
     }
 }

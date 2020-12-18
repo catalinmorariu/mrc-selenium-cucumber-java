@@ -6,9 +6,9 @@ import io.cucumber.java.en.Then;
 import static com.codeborne.selenide.Selenide.$$;
 import static com.codeborne.selenide.Selenide.open;
 
-public class LaunchPadSteps {
+public class LaunchPad {
 
-    @Then("^go to \"([^\"]*)\" tile at launchpad$")
+    @Then("go to {string} tile at launchpad")
     public void gotToTile(String tileName) {
         String[] href = new String[1];
         $$(".mrc-tile")

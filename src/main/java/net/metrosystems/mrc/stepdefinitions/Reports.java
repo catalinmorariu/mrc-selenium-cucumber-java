@@ -9,7 +9,7 @@ import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
 
-public class ReportSteps {
+public class Reports {
     @Then("^go to report \"([^\"]*)\" and wait$")
     public void goToReport(String reportName) {
         String[] text = new String[1];

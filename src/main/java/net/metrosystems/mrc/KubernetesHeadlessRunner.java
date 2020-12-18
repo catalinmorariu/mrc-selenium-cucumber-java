@@ -30,6 +30,7 @@ public final class KubernetesHeadlessRunner {
     private static void prepareForCommandLineStart() {
         System.setProperty("selenide.headless", "true");
         Configuration.headless = true;
+        Configuration.clickViaJs = true;
         Configuration.browser = Browsers.CHROME;
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--disable-extensions", "--headless",

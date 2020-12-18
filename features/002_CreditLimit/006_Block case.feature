@@ -11,8 +11,8 @@ Feature: Top Management Tab
   And I enter password into input field having id "password"
   When I click on element having id "submit"
   Then I wait for page loading but no more than 20 seconds
-      
-  Scenario: Credit limit request  
+
+  Scenario: Credit limit request
   Given I click on element having xpath "//*[@id="react"]/div/main/div/div[1]/a[1]/label/h2"
   When I enter "23/44852" into input field having id "search-input"
   Then I click on element having xpath "/html/body/div/div/main/div/section[2]/ul/li[2]/a/div/h1"
@@ -22,7 +22,7 @@ Feature: Top Management Tab
 	And I click on element having xpath "/html/body/div/div/main/div/div[3]/div[1]/a/span/ul/li[1]/p/mrc-date"
 	And I click on element having id "react-tabs-0"
 	And I click on element having id "react-tabs-2"
-	And I click on element having id "react-tabs-4"	
+	And I click on element having id "react-tabs-4"
 	And I click on element having id "react-tabs-6"
 	And I click on element having id "react-tabs-8"
 	And I click on element having id "react-tabs-14"
@@ -39,7 +39,7 @@ Feature: Top Management Tab
 	And I click on element having xpath "/html/body/div[1]/div/main/div/div[4]/div[1]/div/section/div/button"
 	When I enter "Please check the conditions, previously" into input field having xpath "/html/body/div[1]/div/main/div/div[4]/div[1]/div/section/div/div/div[2]/div/div/div[2]/textarea"
 	And I click on element having xpath "//*[@id="react-tabs-1"]/div/section/div/div/div[2]/div/div/div[3]/button[1]"
-	
+
 	And I click on element having xpath "//*[@id="react"]/div/div/div/div[1]/ul/li[2]/a/img"
 	And I click on element having xpath "//*[@id="react"]/div/main/div/div[1]/div/div[2]/label/span/p"
 	And I click on element having xpath "/html/body/div/div/main/div/div[3]/div[1]/a/span/ul/li[2]"
@@ -58,10 +58,6 @@ Feature: Top Management Tab
 	When I enter "Positive recommendation;;;;;;;Positive recommendation" into input field having xpath "/html/body/div[1]/div/main/div/div[4]/div[1]/div/section/div/div/div[2]/div/div/div[2]/textarea"
 	And I click on element having xpath "//*[@id="react-tabs-1"]/div/section/div/div/div[2]/div/div/div[3]/button[1]"
 
-
-
-
-
 Feature: MRC Login
   As a user I should able to login into MRC.
 
@@ -77,7 +73,7 @@ Feature: MRC Login
     And I enter password into input field having id "password"
     When I click on element having id "submit"
     Then I wait for page loading but no more than 20 seconds
-   
+
   Scenario: Type customer
   	Given I click on element having xpath "/html/body/div/div/main/div/div[1]/a[2]/label/h2"
     Then I enter "23/44852" into input field having id "search-input"
@@ -147,13 +143,13 @@ Feature: MRC Login
 Feature: Credit Limit positive flow
 
   Scenario: Prerequisites
-  
+
     Given I want to test against "https://mrc-pp.metrosystems.net/"
     And I want to use user "catalin.morariu@metrosystems.net" with password "Sindo.074438!"
     And I want to use default timeout 20 seconds for each operation
 
   Scenario: I login with valid credential
-  
+
     Given I go to the host
     When I enter user into input field having id "user_id"
     And I enter password into input field having id "password"
@@ -161,7 +157,7 @@ Feature: Credit Limit positive flow
     Then I wait for page loading but no more than 20 seconds
 
   Scenario: Customer search and submit request
-  
+
     Given I click on element having xpath "//*[@id="react"]/div/main/div/div[1]/a[1]/label/h2"
     When I enter "23/44852" into input field having id "search-input"
     Then I click on element having xpath "/html/body/div/div/main/div/section[2]/ul/li[2]/a/div/h1"
@@ -174,8 +170,8 @@ Feature: Credit Limit positive flow
     And I click on element having id "react-tabs-0"
     And I click on element having id "react-tabs-2"
     #And I click on element having xpath "//*[@id="react"]/div/main/form/div[3]/button[2]"
-    
-   
+
+
 
   Scenario: Credit details
 
@@ -187,10 +183,10 @@ Feature: Credit Limit positive flow
     When I enter "15" into input field having id ""
     Given I click on element having xpath "//*[@id="react-tabs-3"]/div/div/div/div[2]/table/tbody/tr[6]/td/div[2]/div[2]/div[2]/div[1]/div/div/div"
     //And I click on element having xpath "//*[@id="react"]/div/main/form/div[3]/button[2]"
-    
-    
+
+
   	Scenario: CM approval
-  
+
     Given I click on element having xpath "//*[@id="react"]/div/div/div/div[1]/ul/li[2]/a/img"
     Then I click on element having xpath "//*[@id="react"]/div/main/div/div[1]/div/div[2]/label/div"
     Then I wait for page loading but no more than 2 seconds
@@ -257,9 +253,9 @@ Feature: CL reject an approve less
   And I enter password into input field having id "password"
   When I click on element having id "submit"
   Then I wait for page loading but no more than 20 seconds
-      
+
   Scenario: Customer search and submit request
-  
+
     Given I click on element having xpath "//*[@id="react"]/div/main/div/div[1]/a[1]/label/h2"
     When I enter "23/44852" into input field having id "search-input"
     Then I click on element having xpath "/html/body/div/div/main/div/section[2]/ul/li[2]/a/div/h1"
@@ -272,8 +268,8 @@ Feature: CL reject an approve less
     And I click on element having id "react-tabs-0"
     And I click on element having id "react-tabs-2"
     And I click on element having id "react-tabs-2"
-    
-    
+
+
 	#Credit details
 
   	Given I click on element having xpath "//*[@id="react"]/div/main/form/div[3]/button[2]"
@@ -281,7 +277,7 @@ Feature: CL reject an approve less
     Given I click on element having xpath "//*[@id="react-tabs-3"]/div/div/div/div[2]/table/tbody/tr[4]/td[6]/span"
     When I click on element having xpath "//*[@id="react-tabs-3"]/div/div/div/div[2]/table/tbody/tr[6]/td/div[2]/div[2]/div[1]/div[2]/div/span"
     Then I wait for page loading but no more than 2 seconds
-    Then I scroll to element having xpath "//*[@id="react-tabs-3"]/div/div/div/div[2]/table/tbody/tr[6]/td/div[2]/div[2]/div[2]/div[1]/div/div/div/input"   
+    Then I scroll to element having xpath "//*[@id="react-tabs-3"]/div/div/div/div[2]/table/tbody/tr[6]/td/div[2]/div[2]/div[2]/div[1]/div/div/div/input"
    	And I click on element having xpath "//*[@id="react-tabs-3"]/div/div/div/div[2]/table/tbody/tr[6]/td/div[2]/div[2]/div[2]/div[1]/div/div/div/input"
     Then I enter "30000" into input field having css "#react-tabs-3 > div > div > div > div.mrc-ui-credit-tab-table-container.mrc-ui-grid-item > table > tbody > tr.mrc-ui-table-r.mrc-ui-table-r-form > td > div:nth-child(3) > div.mrc-ui-form-main-column > div.mrc-ui-card.mrc-ui-card-shadow > div:nth-child(2) > div > div > div > input"
     Then I clear input field having css "#react-tabs-3 > div > div > div > div.mrc-ui-credit-tab-table-container.mrc-ui-grid-item > table > tbody > tr.mrc-ui-table-r.mrc-ui-table-r-form > td > div:nth-child(5) > div.mrc-ui-form-main-column > div > div > input"
@@ -298,10 +294,10 @@ Feature: CL reject an approve less
 		And I click on element having id "react-tabs-2"
 		Then I wait for page loading but no more than 2 seconds
 		And I click on element having xpath "//*[@id="react"]/div/main/form/div[3]/button[2]"
-	
-		
+
+
 #		Reject by CM
-		
+
 		Given I click on element having xpath "//*[@id="react"]/div/div/div/div[1]/ul/li[2]/a/img"
     Then I click on element having xpath "//*[@id="react"]/div/main/div/div[1]/div/div[2]/label/div"
     Then I wait for page loading but no more than 2 seconds
@@ -327,9 +323,9 @@ Feature: CL reject an approve less
     And I click on element having id "react-tabs-0"
     And I click on element having id "react-tabs-2"
     And I click on element having id "mrc-error-button"
-    
+
     #Approve less by CM
-    
+
     #Given I click on element having xpath "//*[@id="react"]/div/div/div/div[1]/ul/li[2]/a/img"
     #Then I click on element having xpath "//*[@id="react"]/div/main/div/div[1]/div/div[2]/label/div"
     #Then I wait for page loading but no more than 2 seconds
@@ -339,11 +335,11 @@ Feature: CL reject an approve less
 #
   #	Then I wait for page loading but no more than 2 seconds
     #Given I click on element having id "react-tabs-4"
-    #Then I wait for page loading but no more than 2 seconds  
+    #Then I wait for page loading but no more than 2 seconds
    #	And I click on element having xpath "//*[@id="react-tabs-5"]/div/div/div/div[2]/table/tbody/tr[5]/td[8]/span"
    #	And I click on element having xpath "//*[@id="react-tabs-5"]/div/div/div/div[2]/table/tbody/tr[8]/td/div[2]/div[2]/div[1]/div[3]/div/span"
    #	Then I clear input field having css "#react-tabs-5 > div > div > div > div.mrc-ui-credit-tab-table-container.mrc-ui-grid-item > table > tbody > tr.mrc-ui-table-r.mrc-ui-table-r-form > td > div:nth-child(3) > div.mrc-ui-form-main-column > div.mrc-ui-card.mrc-ui-card-shadow > div:nth-child(2) > div > div > div > input"
-    #Then I enter "20000" into input field having css "#react-tabs-5 > div > div > div > div.mrc-ui-credit-tab-table-container.mrc-ui-grid-item > table > tbody > tr.mrc-ui-table-r.mrc-ui-table-r-form > td > div:nth-child(3) > div.mrc-ui-form-main-column > div.mrc-ui-card.mrc-ui-card-shadow > div:nth-child(2) > div > div > div > input"  
+    #Then I enter "20000" into input field having css "#react-tabs-5 > div > div > div > div.mrc-ui-credit-tab-table-container.mrc-ui-grid-item > table > tbody > tr.mrc-ui-table-r.mrc-ui-table-r-form > td > div:nth-child(3) > div.mrc-ui-form-main-column > div.mrc-ui-card.mrc-ui-card-shadow > div:nth-child(2) > div > div > div > input"
 #		And I click on element having id "react-tabs-14"
 #		And I click on element having xpath "//*[@id="react-tabs-15"]/div/div[1]/button"
 #		Then I enter "Approving less ammount of money, due to high risk" into input field having css "#react-tabs-15 > div > div.mt-5 > div > div.mrc-ui-modal > div > div > div.mrc-ui-input.clear-both > textarea"
@@ -353,9 +349,9 @@ Feature: CL reject an approve less
 #		And I click on element having xpath "//*[@id="mrc-approve-button"]"
 #		Then I wait for page loading but no more than 2 seconds
 #		And I click on element having xpath "//*[@id="react"]/div/div[1]/div/div[1]/ul/li[1]/a/img"
-		
+
 		#Approve less by HOT
-		
+
 #		Given I click on element having xpath "//*[@id="react"]/div/div/div/div[1]/ul/li[2]/a/img"
     #Then I click on element having xpath "//*[@id="react"]/div/main/div/div[1]/div/div[2]/label/div"
     #Then I wait for page loading but no more than 2 seconds
@@ -368,17 +364,17 @@ Feature: CL reject an approve less
 #		And I click on element having xpath "//*[@id="mrc-approve-button"]"
 #		Then I wait for page loading but no more than 2 seconds
 #		And I click on element having xpath "//*[@id="react"]/div/div[1]/div/div[1]/ul/li[1]/a/img"
-		
+
 		Scenario: Customer search
-		
-		
+
+
 		Given I click on element having xpath "//*[@id="react"]/div/main/div/div[1]/a[1]/label/h2"
     When I enter "23/44852" into input field having id "search-input"
     Then I click on element having xpath "/html/body/div/div/main/div/section[2]/ul/li[2]/a/div/h1"
     Then I wait for page loading but no more than 10 seconds
 
-	
 
 
-    
-	
+
+
+

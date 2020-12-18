@@ -9,6 +9,8 @@ import org.openqa.selenium.By;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.time.Duration;
+import java.time.temporal.ChronoUnit;
 import java.util.Properties;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
@@ -18,7 +20,8 @@ import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.closeWebDriver;
 import static com.codeborne.selenide.Selenide.open;
 
-public class UserStepDefinitions {
+public class Generic {
+    private static final Duration DEFAULT_TIMEOUT = Duration.of(120, ChronoUnit.SECONDS);
     private static volatile String host;
     private static volatile String user;
     private static volatile String password;
@@ -26,6 +29,7 @@ public class UserStepDefinitions {
 
     //Prerequisite Steps
     static {
+        Configuration.timeout = DEFAULT_TIMEOUT.getSeconds() * 1000;
         try (InputStream iStream = Thread.currentThread().getContextClassLoader().getResourceAsStream("users.properties")) {
             // Loading properties file from the path (relative path given here)
             USER_PASS.load(iStream);
@@ -34,44 +38,44 @@ public class UserStepDefinitions {
         }
     }
 
-    @Then("^I want to test against \"([^\"]*)\"$")
+    @Then("I want to test against {string}")
     public void goToHost(String host) {
-        synchronized (UserStepDefinitions.class) {
-            UserStepDefinitions.host = host;
+        synchronized (Generic.class) {
+            Generic.host = host;
         }
     }
 
-    @Then("^I want to test against \"([^\"]*)\" as \"([^\"]*)\"$")
+    @Then("I want to test against {string} as {string}")
     public void goToHostAs(String host, String username) {
-        synchronized (UserStepDefinitions.class) {
+        synchronized (Generic.class) {
             goToHost(host);
-            UserStepDefinitions.user = username;
-            UserStepDefinitions.password = USER_PASS.getProperty(username);
+            Generic.user = username;
+            Generic.password = USER_PASS.getProperty(username);
         }
     }
 
-    @Then("^I want to test against \"([^\"]*)\" as \"([^\"]*)\" with password \"([^\"]*)\"$")
+    @Then("I want to test against {string} as {string} with password {string}")
     public void goToHostAs(String host, String username, String password) {
-        synchronized (UserStepDefinitions.class) {
+        synchronized (Generic.class) {
             goToHostAs(host, username);
-            UserStepDefinitions.password = password;
+            Generic.password = password;
         }
     }
 
     @Then("^I want to use user \"([^\"]*)\" with password \"([^\"]*)\"$")
     public void setCredentialsToUse(String user, String password) {
-        synchronized (UserStepDefinitions.class) {
-            UserStepDefinitions.user = user;
-            UserStepDefinitions.password = password;
+        synchronized (Generic.class) {
+            Generic.user = user;
+            Generic.password = password;
         }
     }
 
-    @Then("^I want to use default timeout (\\d+) seconds for each operation$")
+    @Then("I want to use default timeout {int} seconds for each operation")
     public void setTimeoutToUse(int timeoutInSeconds) {
         Configuration.timeout = timeoutInSeconds * 1000L;
     }
 
-    @Then("^Idam login if required for \"([^\"]*)\" as user and \"([^\"]*)\" as password and \"([^\"]*)\"$")
+    @Then("Idam login if required for {string} as user and {string} as password and {string}")
     public void login(String userId, String passId, String submit) {
         open(host);
         if (!WebDriverRunner.url().startsWith(host)) {
