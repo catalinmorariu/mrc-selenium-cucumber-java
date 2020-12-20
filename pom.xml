@@ -22,6 +22,7 @@
 
         <checkstyle.version>8.38</checkstyle.version>
         <cucumber.version>6.9.0</cucumber.version>
+        <error_prone_core.version>2.4.0</error_prone_core.version>
         <guava.version>30.0-jre</guava.version>
         <jackson.version>2.11.3</jackson.version>
         <jackson-databind.version>2.11.3</jackson-databind.version>
@@ -133,6 +134,25 @@
 
     <build>
         <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                    <compilerArgs>
+                        <arg>-XDcompilePolicy=simple</arg>
+                        <arg>-Xplugin:ErrorProne</arg>
+                    </compilerArgs>
+                    <annotationProcessorPaths>
+                        <path>
+                            <groupId>com.google.errorprone</groupId>
+                            <artifactId>error_prone_core</artifactId>
+                            <version>${error_prone_core.version}</version>
+                        </path>
+                    </annotationProcessorPaths>
+                </configuration>
+            </plugin>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
