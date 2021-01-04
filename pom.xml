@@ -20,8 +20,8 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
-        <checkstyle.version>8.38</checkstyle.version>
-        <cucumber.version>6.9.0</cucumber.version>
+        <checkstyle.version>8.39</checkstyle.version>
+        <cucumber.version>6.9.1</cucumber.version>
         <error_prone_core.version>2.4.0</error_prone_core.version>
         <guava.version>30.0-jre</guava.version>
         <jackson.version>2.11.3</jackson.version>
