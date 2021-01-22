@@ -5,6 +5,8 @@ import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 import io.cucumber.java.en.Then;
 import org.openqa.selenium.By;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -17,8 +19,11 @@ import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
 
 public class ReactTabs {
+    private static final Logger LOG = LoggerFactory.getLogger(ReactTabs.class);
 
-    public static final String MRC_MAIN = "mrc-main";
+    public static final String MRC_MAIN = "mrc-ui-app-shell";
+    public static final String MRC_CUSTOMER_STATUS = "mrc-customer-status";
+    public static final String MRC_BTN_GROUP = "mrc-btn-group";
     public static final String REACT_TABS = "react-tabs";
     public static final String INNER_HTML = "innerHTML";
     public static final String REACT_TABS_TAB = "react-tabs__tab";
@@ -26,25 +31,26 @@ public class ReactTabs {
 
     @Then("there should be {string} button and I click it")
     public void checkCreateButtonAndClick(String value) {
-        clickCreateOrEditRequest(value);
+        LOG.info("inside");
+        clickCreateOrEditRequest(value, MRC_CUSTOMER_STATUS);
     }
 
     @Then("if there is a running request then click {string} and cancel it via {string} button")
-    public void clickEditAndCancel(String button1, String button2) {
-        SelenideElement button = $(By.className(MRC_MAIN))
+    public void clickEditAndCancel(String editButton, String cancelButton) {
+        SelenideElement button = $(By.className(MRC_CUSTOMER_STATUS))
             // exactly this button is inside innerHTML => need firstly wait when it is loaded
             .shouldBe(visible).shouldHave(Condition.attribute(INNER_HTML))
-            .$$(By.className(ButtonTypes.fromText(button1).getCssClassName()))
+            .$$(By.className(ButtonTypes.fromText(editButton).getCssClassName()))
             .first().shouldBe(visible);
-
-        if (button1.equalsIgnoreCase(button.getText())) {
-            clickCreateOrEditRequest(button1);
+        LOG.info("Button {}", button);
+        if (editButton.equalsIgnoreCase(button.getText())) {
+            button.click();
             // trick to wait for react specific tags loading on the page
             $(By.className(MRC_MAIN)).shouldBe(visible).shouldHave(Condition.attribute(INNER_HTML))
                 .$(By.className(REACT_TABS)).shouldBe(visible)
                 .$(By.className(SELECTED_REACT_TAB)).shouldBe(visible)
                 .$(By.className("mrc-ui-toggle-box-content")).shouldBe(visible);
-            clickCreateOrEditRequest(button2);
+            clickCreateOrEditRequest(cancelButton, MRC_BTN_GROUP);
         }
     }
 
@@ -93,8 +99,8 @@ public class ReactTabs {
         assert presentedTabNames.containsAll(expectedTabNames);
     }
 
-    private void clickCreateOrEditRequest(String value) {
-        $(By.className(MRC_MAIN))
+    private void clickCreateOrEditRequest(String value, String cssClass2Search) {
+        $(By.className(cssClass2Search))
             // exactly this button is inside innerHTML => need firstly wait when it is loaded
             .shouldBe(visible).shouldHave(Condition.attribute(INNER_HTML))
             .$(By.className(ButtonTypes.fromText(value).getCssClassName()))
