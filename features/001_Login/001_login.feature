@@ -4,5 +4,4 @@ Feature: MRC Login
 
     Given I want to test against "https://mrc-pp.metrosystems.net" as "test.user@metrosystems.net"
     And Idam login if required for "user_id" as user and "password" as password and "submit"
-#    And go to "reportingservice" tile at launchpad
-#    And go to report "Running Requests" and wait
+
