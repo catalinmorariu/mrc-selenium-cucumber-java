@@ -30,6 +30,8 @@ public class ReactTabs {
     public static final String SELECTED_REACT_TAB = "react-tabs__tab-panel--selected";
     public static final String QUICK_CHECK_BUTTON = "mrc-primary-button undefined";
 
+
+
     @Then("there should be {string} button and I click it")
     public void checkCreateButtonAndClick(String value) {
         LOG.info("inside");
