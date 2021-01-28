@@ -28,11 +28,17 @@ public class ReactTabs {
     public static final String INNER_HTML = "innerHTML";
     public static final String REACT_TABS_TAB = "react-tabs__tab";
     public static final String SELECTED_REACT_TAB = "react-tabs__tab-panel--selected";
+    public static final String QUICK_CHECK_BUTTON = "mrc-primary-button undefined";
 
     @Then("there should be {string} button and I click it")
     public void checkCreateButtonAndClick(String value) {
         LOG.info("inside");
         clickCreateOrEditRequest(value, MRC_CUSTOMER_STATUS);
+        clickQuickCheck(value, QUICK_CHECK_BUTTON);
+    }
+
+    public void clickQuickCheck(String value, String quickCheckButton) {
+        $(By.className("mrc-primary-button undefined")).shouldBe(visible).click();
     }
 
     @Then("if there is a running request then click {string} and cancel it via {string} button")

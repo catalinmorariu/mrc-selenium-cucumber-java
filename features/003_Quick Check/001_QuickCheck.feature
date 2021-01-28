@@ -11,7 +11,7 @@ Feature: Quick Check
 
     And go to "quickCheck" tile at launchpad
     And enter "15/1222" into "search-input" and pick it from the list
-    Then there should be "request credit" button and I click it
+    Then there should be "QUICK CHECK" button and I click it
 
 
 

@@ -8,27 +8,21 @@ import org.slf4j.LoggerFactory;
 
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
-
-public class QuickCheck {
-
-    private static final Logger LOG = LoggerFactory.getLogger(QuickCheck.class);
-
-    public static final String QUICK_CHECK_BUTTON = "mrc-primary-button undefined";
-
-
-
-
-import io.cucumber.java.en.Then;
-
-@Then("there should be {string} button and I click it")
-public void checkQcButtonAndClick(String value) {
-    LOG.info("inside");
-    clickQC(value, QUICK_CHECK_BUTTON);
-    }
-
-private void clickQC(String value, String mrc-primary-button undefined) {
-    $(By.className("mrc-primary-button undefined"))
-    .shouldBe(visible).$(By.className(ButtonTypes.fromText(value).getCssClassName()))
-    .shouldBe(visible).shouldHave(Condition.text(value)).click();
-    }
-    }
+//
+//public class QuickCheck {
+//
+//    private static final Logger LOG = LoggerFactory.getLogger(QuickCheck.class);
+//
+//    public static final String QUICK_CHECK_BUTTON = "mrc-primary-button undefined";
+//
+//
+//@Then("there should be {string} button and I click it")
+//public void checkQcButtonAndClick(String value) {
+//    LOG.info("inside");
+//    clickQC(value, QUICK_CHECK_BUTTON);
+//    }
+//
+//private void clickQC(String value, String QUICK_CHECK_BUTTON) {
+//    $(By.className("mrc-primary-button undefined")).click();
+//    }
+//    }
